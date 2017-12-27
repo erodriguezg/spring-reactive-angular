@@ -9,14 +9,8 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>/inicio.xhtml</welcome-file>
+        <welcome-file>/inicio.html</welcome-file>
     </welcome-file-list>
-
-    <!-- error pages -->
-    <error-page>
-        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
-        <location>/login.xhtml</location>
-    </error-page>
 
     <mime-mapping>
         <extension>eot</extension>

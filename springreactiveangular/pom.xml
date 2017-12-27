@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <name>springreactiveangular</name>
-    <description>Example project for springboot with spring web flow - jsf 2- primefaces 6</description>
+    <description>Spring Boot - Reactive - Angular</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -33,13 +33,6 @@
         <version.hikari>2.6.1</version.hikari>
         <version.urlrewrite>4.0.4</version.urlrewrite>
 
-        <version.jsf-api>2.2</version.jsf-api>
-        <version.jsf-mojarra>2.2.15</version.jsf-mojarra>
-        <version.primefaces>6.1</version.primefaces>
-        <version.primefaces-ext>6.1.1</version.primefaces-ext>
-        <version.primefaces-omega>1.1.1</version.primefaces-omega>
-        <version.springwebflow>2.4.6.RELEASE</version.springwebflow>
-
         <version.apache-poi>3.12</version.apache-poi>
         <version.apache-tika>1.16</version.apache-tika>
 
@@ -52,7 +45,6 @@
         <version.commons-codec>1.4</version.commons-codec>
 
         <version.erodriguezg-java-utils>8.2.0</version.erodriguezg-java-utils>
-        <version.erodriguezg-jsf-utils>2.0.2</version.erodriguezg-jsf-utils>
         <version.erodriguezg-beanvalidation-utils>1.0.0</version.erodriguezg-beanvalidation-utils>
 
         <version.junit>4.12</version.junit>
@@ -119,12 +111,6 @@
 
         <dependency>
             <groupId>com.github.erodriguezg</groupId>
-            <artifactId>jsf-utils</artifactId>
-            <version>${version.erodriguezg-jsf-utils}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.erodriguezg</groupId>
             <artifactId>beanvalidation-utils</artifactId>
             <version>${version.erodriguezg-beanvalidation-utils}</version>
         </dependency>
@@ -133,65 +119,6 @@
             <groupId>com.github.erodriguezg</groupId>
             <artifactId>java-utils</artifactId>
             <version>${version.erodriguezg-java-utils}</version>
-        </dependency>
-
-        <!-- JSF -->
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>javax.faces-api</artifactId>
-            <version>${version.jsf-api}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.faces</artifactId>
-            <version>${version.jsf-mojarra}</version>
-        </dependency>
-
-        <!-- JSF PRIMEFACES -->
-
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>${version.primefaces}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>primefaces-extensions</artifactId>
-            <version>${version.primefaces-ext}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.primefaces</groupId>
-                    <artifactId>org.primefaces</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>omega</artifactId>
-            <version>${version.primefaces-omega}</version>
-        </dependency>
-
-        <!-- SPRING WEBFLOW -->
-
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-webflow</artifactId>
-            <version>${version.springwebflow}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-binding</artifactId>
-            <version>${version.springwebflow}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-js</artifactId>
-            <version>${version.springwebflow}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-faces</artifactId>
-            <version>${version.springwebflow}</version>
         </dependency>
 
         <!-- url rewrite -->
