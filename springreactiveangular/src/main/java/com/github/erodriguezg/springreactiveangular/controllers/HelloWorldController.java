@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springreactiveangular.rest;
+package com.github.erodriguezg.springreactiveangular.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

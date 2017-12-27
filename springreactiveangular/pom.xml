@@ -46,6 +46,7 @@
 
         <version.erodriguezg-java-utils>8.2.0</version.erodriguezg-java-utils>
         <version.erodriguezg-beanvalidation-utils>1.0.0</version.erodriguezg-beanvalidation-utils>
+        <version.erodriguez-jwt>1.0.0</version.erodriguez-jwt>
 
         <version.junit>4.12</version.junit>
         <version.assertj>2.2.0</version.assertj>
@@ -119,6 +120,12 @@
             <groupId>com.github.erodriguezg</groupId>
             <artifactId>java-utils</artifactId>
             <version>${version.erodriguezg-java-utils}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.erodriguezg</groupId>
+            <artifactId>jwt-security</artifactId>
+            <version>${version.erodriguez-jwt}</version>
         </dependency>
 
         <!-- url rewrite -->

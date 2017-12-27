@@ -5,7 +5,11 @@ app.db.password=postgres
 app.db.poolsize=10
 
 #PROFILE
-spring.profiles.active=development
+spring.profiles.active=development|production
+
+#JSON WEB TOKENS
+app.jwt.secret-phrase=frase-secreta-jwt-cambiame
+app.jwt.expiration-minutes=5
 
 #LOGGER
 logging.level.com.github.erodriguezg=debug

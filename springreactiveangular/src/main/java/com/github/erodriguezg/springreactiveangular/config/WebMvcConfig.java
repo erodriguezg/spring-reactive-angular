@@ -80,6 +80,22 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     /*
+    Filter CORS
+     */
+
+    @Bean
+    public FilterRegistrationBean urlCorsFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new com.github.erodriguezg.springreactiveangular.security.CorsFilter());
+        registration.addUrlPatterns("/*");
+        registration.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
+                DispatcherType.INCLUDE, DispatcherType.ASYNC, DispatcherType.ERROR));
+        registration.setName("corsFilter");
+        registration.setOrder(1);
+        return registration;
+    }
+
+    /*
     Filter URL REWRITE
      */
 

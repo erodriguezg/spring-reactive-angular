@@ -1,73 +1,84 @@
 package com.github.erodriguezg.springreactiveangular.config;
 
-import com.github.erodriguezg.springreactiveangular.security.CustomAuthenticationProvider;
+import com.github.erodriguezg.security.jwt.StatelessAuthenticationFilter;
+import com.github.erodriguezg.security.jwt.TokenAuthenticationHttpHandler;
+import com.github.erodriguezg.security.jwt.TokenService;
+import com.github.erodriguezg.springreactiveangular.security.SecurityMappings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.*;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.Filter;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Created by eduar on 14/05/2017.
+ * @author eduardo
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String INICIO_URL = "/inicio.xhtml";
-    private static final String LOGIN_URL = "/login.xhtml";
-    private static final String LOGOUT_URL = "/logout";
-    private static final String ACCESS_DENIED_URL = "/access.xhtml";
-    public static final String LOGIN_PROCESS_URL = "/login-process";
-    public static final String USERNAME_PARAM_NAME = "j_username";
-    public static final String PASS_PARAM_NAME = "j_password";
-
     @Autowired
-    private CustomAuthenticationProvider authProvider;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private TokenAuthenticationHttpHandler jwtTokenAuthenticationHttpHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf()
-                .and()
+                .disable()
                 .authorizeRequests()
-                    .antMatchers("/ui/gestionar_usuarios/**").hasAuthority("PERFIL_ADMINISTRADOR")
-                    .anyRequest().permitAll()
-                    .and()
-                .formLogin()
-                    .and()
-                .logout()
-                    .logoutSuccessUrl(INICIO_URL)
-                    .logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))
-                    .invalidateHttpSession(true)
-                    .and()
+                .antMatchers("/").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/*.html", "**/*.html").permitAll()
+                .antMatchers("/*.js", "**/*.js").permitAll()
+                .antMatchers("/*.css", "**/*.css").permitAll()
+
+                // Protected refresh jwt token
+                .antMatchers("/security/refresh").authenticated()
+
+                // Allow anonymous logins
+                .antMatchers("/security/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .exceptionHandling()
-                    .accessDeniedPage(ACCESS_DENIED_URL)
-                    .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(LOGIN_URL))
-                    .and()
-                .addFilterAt(customUsernamePasswordAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
-                .authenticationProvider(this.authProvider);
+                .and()
+                .anonymous()
+                .and()
+                .servletApi()
+                .and()
+                .headers().cacheControl().disable()
+                .and()
+                .addFilterAt(new StatelessAuthenticationFilter(this.jwtTokenAuthenticationHttpHandler), UsernamePasswordAuthenticationFilter.class);
     }
 
-    private Filter customUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
-        UsernamePasswordAuthenticationFilter filter = new UsernamePasswordAuthenticationFilter();
-        filter.setFilterProcessesUrl(LOGIN_PROCESS_URL);
-        filter.setUsernameParameter(USERNAME_PARAM_NAME);
-        filter.setPasswordParameter(PASS_PARAM_NAME);
-        filter.setAuthenticationManager(authenticationManager);
-        filter.setAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler());
-        filter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler(LOGIN_URL));
-        return filter;
+    @Bean
+    public TokenAuthenticationHttpHandler jwtTokenAuthenticationHttpHandler(
+            TokenService tokenService, SecurityMappings securityMappings) {
+        return new TokenAuthenticationHttpHandler(
+                tokenService,
+                securityMappings::tokenSubjectMapToAuth,
+                securityMappings::authToTokenSubjectMap);
+    }
+
+    @Bean
+    public TokenService jwtTokenService(
+            @Value("${app.jwt.secret-phrase}") String jwtSecretPhrase,
+            @Value("${app.jwt.expiration-minutes}") Long jwtExpirationMinutes) {
+        return new TokenService(jwtSecretPhrase, TimeUnit.MINUTES, jwtExpirationMinutes);
+    }
+
+    @Bean
+    public SecurityMappings securityMappers() {
+        return new SecurityMappings();
     }
 
 }
