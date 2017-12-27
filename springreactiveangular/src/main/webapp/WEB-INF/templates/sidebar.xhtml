@@ -1,0 +1,119 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:po="http://primefaces.org/omega">
+
+    <div class="sidebar">
+        <div class="">
+            <div class="nano-content">
+                <div class="logo">
+                    <a id="logo-lineas" href="#">
+                        <h1 class="headline-primary">Seguimiento y Monitoreo<br></br>de las Normas...</h1>
+                        <span class="headline-secondary">Servicio Civil<br></br>Ministerio de Hacienda</span>
+                    </a>
+                </div>
+
+
+                <ui:fragment rendered="#{not identidad.loggedIn}">
+                    <div class="profile">
+                        <a href="#{request.contextPath}/login.xhtml">
+                            <span>Iniciar Sesión</span>
+                            <i class="fa fa-fw fa-sign-in"></i>
+                        </a>
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{identidad.loggedIn}">
+                    <div class="profile">
+                        <a id="profile-button" href="#">
+                            <span>Bienvenido(a): </span><span class="username">#{identidad.nombrePersona}</span>
+                            <i class="fa fa-fw fa-cog"></i>
+                        </a>
+                        <ul>
+                            <li>Perfiles: #nombre_perfil</li>
+                            <li>
+                                <a href="#{request.contextPath}/logout">
+                                    <i class="fa fa-fw fa-sign-out"></i><span>Cerrar Sesión</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </ui:fragment>
+
+
+                <button id="bars" name="bars"
+                        class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" type="button"
+                        role="button" aria-disabled="false">
+                    <span class="ui-button-icon-left ui-icon ui-c fa fa-bars"></span>
+                    <span class="ui-button-text ui-c">ui-button</span>
+                </button>
+
+
+                <script type="text/javascript">
+
+                    $('#bars').on('click', function () {
+                        $('.wrapper .sidebar .menu-container').toggle(100);
+                    });
+
+                </script>
+
+
+                <div class="menu">
+
+                    <h:form id="sidemenu-form">
+
+                        <po:menu>
+
+                            <p:menuitem id="om_inicio" value="Inicio" icon="fa fa-home" url="/inicio.xhtml"/>
+
+                            <p:menuitem id="om_gestionar_usuarios" value="Gestionar Usuarios" icon="fa fa-users"
+                                        url="/ui/gestionar_usuarios" />
+
+                            <p:submenu id="om_components" label="Componentes" icon="fa fa-sitemap">
+                                <p:menuitem id="om_dashboard" value="Dashboard" icon="fa fa-columns"
+                                            url="/dashboard.xhtml"/>
+                                <p:menuitem id="om_showcase_omega" value="Showcase Omega" icon="fa fa-code"
+                                            url="/showcase_omega.xhtml"/>
+                                <p:menuitem id="om_showcase_zeke" value="Showcase Zeke" icon="fa fa-code"
+                                            url="/showcase_zeke.xhtml"/>
+                            </p:submenu>
+                            <p:submenu id="om_default" label="Template Pages" icon="fa fa-life-saver">
+                                <p:menuitem id="om_empty" value="Empty Page" icon="fa fa-square-o" url="/empty.xhtml"/>
+                                <p:menuitem id="om_login" value="Login Page" icon="fa fa-sign-in" url="/login.xhtml"/>
+                                <p:menuitem id="om_error" value="Error Page" icon="fa fa-exclamation-circle"
+                                            url="/error.xhtml"/>
+                                <p:menuitem id="om_404" value="404 Page" icon="fa fa-times" url="/404.xhtml"/>
+                                <p:menuitem id="om_access" value="Access Denied Page" icon="fa fa-exclamation-triangle"
+                                            url="/access.xhtml"/>
+                            </p:submenu>
+                            <p:submenu id="om_hierarchy" label="Menu Hierarchy" icon="fa fa-gg">
+                                <p:submenu id="om_sm1" label="Submenu 1" icon="fa fa-sign-in">
+                                    <p:submenu id="om_sm11" label="Submenu 1.1" icon="fa fa-sign-in">
+                                        <p:menuitem id="om_lnk111" value="Link 1.1.1" icon="fa fa-sign-in" url="#"/>
+                                        <p:menuitem id="om_lnk112" value="Link 1.1.2" icon="fa fa-sign-in" url="#"/>
+                                        <p:menuitem id="om_lnk113" value="Link 1.1.3" icon="fa fa-sign-in" url="#"/>
+                                    </p:submenu>
+                                    <p:submenu id="om_sm12" label="Submenu 1.2" icon="fa fa-sign-in">
+                                        <p:menuitem id="om_lnk121" value="Link 1.2.1" icon="fa fa-sign-in" url="#"/>
+                                    </p:submenu>
+                                </p:submenu>
+                                <p:submenu id="om_sm2" label="Submenu 2" icon="fa fa-sign-in">
+                                    <p:submenu id="om_sm21" label="Submenu 2.1" icon="fa fa-sign-in">
+                                        <p:menuitem id="om_lnk211" value="Link 2.1.1" icon="fa fa-sign-in" url="#"/>
+                                        <p:menuitem id="om_lnk212" value="Link 2.1.2" icon="fa fa-sign-in" url="#"/>
+                                    </p:submenu>
+                                    <p:submenu id="om_sm22" label="Submenu 2.2" icon="fa fa-sign-in">
+                                        <p:menuitem id="om_lnk221" value="Link 2.2.1" icon="fa fa-sign-in" url="#"/>
+                                    </p:submenu>
+                                </p:submenu>
+                            </p:submenu>
+                        </po:menu>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ui:composition>

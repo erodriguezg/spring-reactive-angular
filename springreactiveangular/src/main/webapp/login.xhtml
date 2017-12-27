@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0.0, maximum-scale=1.0.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </f:facet>
+    <title>Iniciar Sesión</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/app/images/favicon.ico"/>
+    <h:outputScript name="js/primefaces.spanish.locale.js" library="app"/>
+    <h:outputScript name="js/jquery.Rut.js" library="app"/>
+    <h:outputScript name="js/csrf.js" library="app"/>
+    <h:outputScript name="js/general.js" library="app"/>
+</h:head>
+
+<h:body styleClass="login-body">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{loginBean.verificarErroresLogin()}"/>
+    </f:metadata>
+
+    <p:importConstants type="com.github.erodriguezg.springreactiveangular.utils.ConstantesUtil" var="Constantes"/>
+
+    <h:form id="loginForm" prependId="false">
+        <div id="login-wrapper">
+            <img class="" src="#{request.contextPath}/resources/app/images/logo-min-gob.png"/>
+
+            <div id="login-container">
+
+                <p:growl id="growl" showDetail="true" showSummary="false" sticky="true"/>
+
+                <h1 class="title">Entrada a Sistema</h1>
+
+                <p:outputPanel id="loginPanel" styleClass="ui-g ui-fluid">
+                    <div class="ui-g-12">
+                        <p:inputText id="j_username" placeholder="Username" requiredMessage="Username es requerido"
+                                     value="#{loginBean.username}" required="true"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:password id="j_password" value="#{loginBean.password}"
+                                    placeholder="Password" feedback="false" required="true"
+                                    requiredMessage="Password es requerido"/>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <span class="remember-me">Remember Me</span>
+                        <p:selectBooleanCheckbox/>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p:link>Forgot Password</p:link>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:commandButton ajax="false" action="#{loginBean.login()}" value="Login" icon="fa fa-check"/>
+                    </div>
+                </p:outputPanel>
+            </div>
+            <div class="login-footer">Ministerio de Zeke - Gobierno de Shile.</div>
+        </div>
+    </h:form>
+
+    <h:outputStylesheet name="css/layout.css" library="omega-layout"/>
+    <ui:include src="/WEB-INF/templates/includes/funciones_javascript_globales.xhtml"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/app/css/login_main.css"/>
+    <ui:include src="/WEB-INF/templates/includes/csrf.xhtml"/>
+
+</h:body>
+
+</html>

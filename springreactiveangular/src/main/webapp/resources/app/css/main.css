@@ -1,0 +1,324 @@
+@charset "UTF-8";
+/* General */
+/* Menu */
+/* Topbar */
+/* GreenButton */
+/* YellowButton */
+/* RedButton */
+/* greyButton */
+/* BlackButton */
+/* BlueButton */
+/* AquaButton */
+/* NavyButton */
+/* UI ICONS */
+/* positioning */
+
+/***********
+Grls
+***********/
+@font-face {
+    font-family: 'gobCL';
+    font-weight: 300;
+    font-style: normal;
+    src: url("../fonts/gobcl_light.eot?") format("eot"),
+    url("../fonts/gobcl_light.woff") format("woff"),
+    url("../fonts/gobcl_light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "gobCL";
+    font-weight: 500;
+    font-style: normal;
+    src: url('../fonts/gobcl_regular.eot?') format('eot'), url('../fonts/gobcl_regular.woff') format('woff'), url('../fonts/gobcl_regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "gobCL";
+    font-weight: 700;
+    font-style: normal;
+    src: url('../fonts/gobcl_bold.eot?') format('eot'), url('../fonts/gobcl_bold.woff') format('woff'), url('../fonts/gobcl_bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "gobCL";
+    font-weight: 900;
+    font-style: normal;
+    src: url('../fonts/gobcl_heavy.eot?') format('eot'), url('../fonts/gobcl_heavy.woff') format('woff'), url('../fonts/gobcl_heavy.ttf') format('truetype');
+}
+
+.gobcl {
+    font-family: "gobCL", Tahoma, Verdana, Segoe, sans-serif;
+}
+
+* {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+body, .main-body {
+    font-family: "gobCL", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #333;
+    background: #edf0f5;
+    min-height: 100vh;
+    position: relative;
+}
+
+a,
+.wrapper .sidebar .profile > a,
+.wrapper .sidebar ul li > a {
+    color: #0168b3;
+}
+
+/***********
+Header
+***********/
+.wrapper .sidebar {
+    position: initial;
+    width: 100%;
+    display: block;
+    background: #fff;
+    color: #000;
+    border-bottom: 2px solid #ddd;
+}
+
+.wrapper .sidebar .logo {
+    float: left;
+    margin-left: 20px;
+    margin-right: 10px;
+    height: auto;
+    text-align: left;
+    padding: 0 0;
+    margin-bottom: 10px;
+}
+
+#logo-lineas {
+    background: url('../images/header-lineas.png') top left no-repeat;
+    display: block;
+    padding-top: 15px;
+    margin-bottom: 5px;
+}
+
+#logo-lineas .headline-primary {
+    font-size: 21px;
+    color: #0168b3;
+    font-weight: bold;
+    text-align: right;
+    display: block;
+    text-align: left;
+    margin-bottom: 9px;
+    line-height: 22px;
+}
+
+#logo-lineas .headline-secondary {
+    font-size: 15px;
+    color: #0168b3;
+    text-align: right;
+    display: block;
+    text-align: left;
+    line-height: 16px;
+}
+
+.wrapper .sidebar .profile {
+    float: right;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.wrapper .sidebar .profile ul {
+    background-color: white;
+}
+
+.wrapper .sidebar .menu:before,
+.wrapper .sidebar .menu:after {
+    clear: both;
+    display: table;
+    content: ' ';
+}
+
+.wrapper .sidebar .menu {
+    display: block;
+    clear: both;
+}
+
+.wrapper .sidebar .menu-container {
+    padding: 0 0;
+}
+
+.wrapper .sidebar .menu-container li {
+    display: inline-block;
+    position: relative;
+}
+
+.wrapper .sidebar ul {
+    background: #f5f5f5;
+}
+
+.wrapper .sidebar ul li:last-child > a {
+    border: none;
+}
+
+.wrapper .sidebar ul li > a {
+    font-weight: bold;
+    border: none;
+    border-right: 1px solid #ccc;
+}
+
+.wrapper .sidebar ul li > a:hover {
+    padding: 15px;
+    background: #fff;
+}
+
+.wrapper .sidebar ul li.active-menuitem > a {
+    background: #0168b3;
+    color: #fff;
+}
+
+.wrapper .sidebar ul li > ul {
+    position: absolute;
+    top: 51px;
+    left: -50%;
+    right: 0;
+    padding: 0 0;
+    box-shadow: 0 3px 11px rgba(0, 0, 0, .25);
+    z-index: 200;
+    border: none;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li {
+    width: 100%;
+    background: #fff;
+}
+
+.wrapper .sidebar ul li > ul li a {
+    border: none;
+    padding: 15px;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li a:hover {
+    background: #e6e6e6;
+    color: #333;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li.active-menuitem a {
+    background: #e6e6e6;
+    color: #0168b3;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li.active-menuitem a:hover {
+    background: #fff;
+    color: #333;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li.active-menuitem > ul li.active-menuitem a {
+    background-color: #fff;
+    color: #0168b3;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li.active-menuitem > ul li.active-menuitem a:hover {
+    background-color: #e6e6e6;
+    color: #333;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li.active-menuitem > ul li.active-menuitem > ul li a {
+    background-color: #fff;
+    color: #0168b3;
+}
+
+.wrapper .sidebar ul li.active-menuitem > ul li.active-menuitem > ul li.active-menuitem > ul li a:hover {
+    background: #e6e6e6;
+    color: #333;
+}
+
+/***********
+Topbar
+***********/
+.wrapper .topbar {
+    margin: 0 0;
+    position: initial;
+    height: auto;
+    min-height: 50px;
+    display: none;
+}
+
+#bars {
+    display: none;
+}
+
+/***********
+MAIN
+***********/
+
+.wrapper .main {
+    margin: 0 0;
+    padding: 0 16px 70px;
+}
+
+/***********
+MAIN
+***********/
+.wrapper .footer {
+    margin: 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.botonera a.ui-commandlink {
+    margin-right: 5px;
+}
+
+.botonera.centrada {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    text-align: center;
+}
+
+.botonera.centrada button {
+    width: auto;
+}
+
+.seccion.contenedora {
+    display: inline-block;
+    width: 100%;
+}
+
+.seccion.izquierda {
+    width: 50%;
+    float: left;
+}
+
+.seccion.izquierda div.ui-selectonemenu {
+    min-width: 39px;
+    max-width: 81px;
+    top: 7px;
+    margin-left: 7px;
+    margin-right: 4px;
+}
+
+.seccion.derecha {
+    width: 50%;
+    margin-bottom: 15px;
+    margin-top: 6px;
+    float: right;
+    text-align: right;
+}
+
+.seccion.contenedora button {
+    width: auto;
+}
+
+.ui-dialog .ui-dialog-content {
+    max-height:500px;
+    overflow:auto ;
+}
+
+table.ui-panelgrid tr {
+    border-style: none;
+}
+
+table.ui-panelgrid tr td.ui-panelgrid-cell {
+    border-style: none;
+}
