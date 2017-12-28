@@ -19,7 +19,7 @@ export class ApiHttp extends Http {
         defaultOptions: RequestOptions,
         private router: Router,
         private loadingService: LoadingService
-        ) {
+    ) {
         super(backend, defaultOptions);
     }
 
@@ -44,42 +44,42 @@ export class ApiHttp extends Http {
         (<Request>url).url = !u.startsWith(ENVIRONMENT.API_URL) ? ENVIRONMENT.API_URL + u : u;
         console.log(url);
         return this.interceptor(super.request(url, this.getCustomRequestOptions(options)))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         return super.get(url, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         return super.post(url, body, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         return super.put(url, body, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
         return super.delete(url, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         return super.patch(url, body, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     head(url: string, options?: RequestOptionsArgs): Observable<Response> {
         return super.head(url, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     options(url: string, options?: RequestOptionsArgs): Observable<Response> {
         return super.options(url, this.getCustomRequestOptions(options))
-                    .catch((error: any) => this.handleError(error));
+            .catch((error: any) => this.handleError(error));
     }
 
     private handleError (error: Response | any) {

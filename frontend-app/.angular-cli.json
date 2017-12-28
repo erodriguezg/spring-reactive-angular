@@ -38,10 +38,8 @@
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
-        "dev": "environments/environment.dev.ts",
-        "qaCliente": "environments/environment.qaCliente.ts",
-        "qaZeke": "environments/environment.qaZeke.ts",   
-        "prod": "environments/environment.prod.ts"            
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
       }
     }
   ],

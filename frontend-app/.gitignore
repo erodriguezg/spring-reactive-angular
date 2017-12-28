@@ -12,5 +12,7 @@ login/**/*.js
 *.DS_Store
 typings
 .vscode/
+.idea/
+yarn.lock
 .sass-cache/
 constants_ambient.js
