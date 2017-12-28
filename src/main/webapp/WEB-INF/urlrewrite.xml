@@ -7,19 +7,10 @@
     
 <rule>
         <from>^/$</from>
-        <to type="redirect">%{context-path}/inicio.html</to>
+        <to type="redirect">%{context-path}/index.html</to>
     </rule>
     
-    <rule>
-        <from>^/app/$</from>
-        <to type="redirect">%{context-path}/inicio.html</to>
-    </rule>
-    <rule>
-        <from>^/app$</from>
-        <to type="redirect">%{context-path}/inicio.html</to>
-    </rule>
-
-        <!--    
+        <!--
     <rule>
         <note>
             The rule means that requests to /test/status/ will be redirected to /rewrite-status

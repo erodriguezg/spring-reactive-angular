@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../src/main/resources/frontend-dist",
       "assets": [
         "assets",
         "upload.php"
