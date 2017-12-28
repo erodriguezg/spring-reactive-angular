@@ -1,0 +1,16 @@
+node
+node_modules
+prod
+dist
+out
+app/**/*.js
+login/**/*.js
+*.log
+*.map
+*.d.ts
+!typings.d.ts
+*.DS_Store
+typings
+.vscode/
+.sass-cache/
+constants_ambient.js

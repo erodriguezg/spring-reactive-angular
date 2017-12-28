@@ -32,6 +32,7 @@
         <version.postgres>42.0.0</version.postgres>
         <version.hikari>2.6.1</version.hikari>
         <version.urlrewrite>4.0.4</version.urlrewrite>
+        <version.jjwt>0.7.0</version.jjwt>
 
         <version.apache-poi>3.12</version.apache-poi>
         <version.apache-tika>1.16</version.apache-tika>
@@ -51,6 +52,11 @@
         <version.junit>4.12</version.junit>
         <version.assertj>2.2.0</version.assertj>
         <version.mockito>2.8.47</version.mockito>
+
+        <frontend.node.version>v6.9.1</frontend.node.version>
+        <frontend.yarn.version>v0.27.5</frontend.yarn.version>
+        <frontend.environment>prod</frontend.environment>
+        <frontend.skipBuild>false</frontend.skipBuild>
 
     </properties>
 
@@ -126,6 +132,14 @@
             <groupId>com.github.erodriguezg</groupId>
             <artifactId>jwt-security</artifactId>
             <version>${version.erodriguez-jwt}</version>
+        </dependency>
+
+        <!-- JSON WEB TOKENS -->
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${version.jjwt}</version>
         </dependency>
 
         <!-- url rewrite -->
@@ -234,6 +248,22 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>../frontend-app/dist</directory>
+                            <includes>
+                                <include>*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -300,6 +330,78 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- frontend plugins -->
+
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>install node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ng build</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>run build-${frontend.environment}</arguments>
+                        </configuration>
+                    </execution>
+                    <!--
+                    <execution>
+                        <id>ng clean</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>clean</phase>
+                        <configuration>
+                            <arguments>run clean</arguments>
+                        </configuration>
+                    </execution>
+                    -->
+                </executions>
+                <configuration>
+                    <skip>${frontend.skipBuild}</skip>
+                    <nodeVersion>${frontend.node.version}</nodeVersion>
+                    <yarnVersion>${frontend.yarn.version}</yarnVersion>
+                    <workingDirectory>../frontend-app</workingDirectory>
+                    <!--<installDirectory>../frontend-app</installDirectory>-->
+                    <!--<srcdir>../frontend-app</srcdir>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <webXml>web.xml</webXml>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>../frontend-app/dist</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
 
         </plugins>
         <finalName>${project.artifactId}</finalName>

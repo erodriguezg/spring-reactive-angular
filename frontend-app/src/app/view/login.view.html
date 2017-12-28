@@ -1,0 +1,98 @@
+<div id="blue_panel">
+    <div class="card login-panel ui-fluid">
+
+         <div class="ui-g">
+
+            <div class="ui-g-6">
+                <span class="md-inputfield">
+                    <input type="text" pInputText [(ngModel)]="username" autocomplete="off">
+                    <label>Nombre Usuario</label>
+                </span>
+            </div>
+
+            <div class="ui-g-6">
+                <span class="md-inputfield">
+                    <input type="password" [(ngModel)]="password" (keyup.enter)="login()" pInputText autocomplete="off">
+                    <label>Contraseña</label>
+                </span>
+            </div>
+            
+            <button type="button" pButton label="Ingresar" class="btn green-btn" (click)="login()"></button>
+            
+            <button type="button" pButton label="¿Olvidaste tu contraseña?" class="btn primary-btn"></button>
+            
+        </div>        
+    </div>
+
+    <div class="go_down">
+        <i class="fa fa-fw fa-chevron-down"></i>
+        <i class="fa fa-fw fa-chevron-down"></i>
+    </div>
+</div>
+
+<div class="container init">
+         <div class="ui-g">
+             
+            <div class="clearfix">
+                <div class="ui-g-6">
+                    <p>¿Qué es?</p>
+                    <p>El Sistema Estadístico y de Gestión del
+                        Registro Social de Hogares es una
+                        herramienta informática que permite
+                        generar diferentes estadísticas a partir
+                        del Registro Social de Hogares.</p>
+                </div>
+
+                <div class="ui-g-6">
+                    <div class="graf_yellow"></div>
+                </div>
+            </div>
+
+            <br>
+            <div class="clearfix">
+                <div class="ui-g-6">
+                    <div class="graf_trio"></div>
+                </div>
+
+                <div class="ui-g-6">
+                    <p>Se puede visualizar las estadísticas en
+                        tablas, gráficos o mapas. Además todos
+                        los formatos pueden ser exportados a
+                        Excel, para facilitar su procesamiento
+                        posterior.</p>
+                </div>
+            </div>
+
+            <br>
+            <div class="clearfix">
+                <div class="ui-g-6">
+                    <p>Permite consultar bases del Registro
+                        Social de Hogares de meses anteriores.
+                        Esto posibilita comparar indicadores a
+                        través del tiempo.</p>
+                </div>
+                <div class="ui-g-6">
+                    <div class="graf_circle"></div>
+                </div>            
+            </div>
+
+            <br>
+             <!-- fourth line -->
+
+            <div class="clearfix">
+                <div class="ui-g-6">
+                    <div class="graf_slide"></div>
+                </div>
+
+                <div class="ui-g-6">
+                    <p>Permite combinar una serie de filtros de
+                        manera de generar estratos poblacionales
+                        muy específicos, a nivel de personas o de
+                        hogares.</p>
+                </div>
+            </div>
+         
+         </div>
+</div>
+
+<p-growl [value]="msgs"></p-growl>
