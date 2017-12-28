@@ -255,7 +255,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>../frontend-app/dist</directory>
+                            <directory>src/resources/frontend-dist</directory>
                             <includes>
                                 <include>*</include>
                             </includes>
@@ -337,71 +337,12 @@
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>install node and yarn</id>
-                        <goals>
-                            <goal>install-node-and-yarn</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                    </execution>
-                    <execution>
-                        <id>yarn install</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <phase>compile</phase>
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ng build</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <arguments>run build-${frontend.environment}</arguments>
-                        </configuration>
-                    </execution>
-                    <!--
-                    <execution>
-                        <id>ng clean</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <phase>clean</phase>
-                        <configuration>
-                            <arguments>run clean</arguments>
-                        </configuration>
-                    </execution>
-                    -->
-                </executions>
                 <configuration>
-                    <skip>${frontend.skipBuild}</skip>
                     <nodeVersion>${frontend.node.version}</nodeVersion>
                     <yarnVersion>${frontend.yarn.version}</yarnVersion>
-                    <workingDirectory>../frontend-app</workingDirectory>
-                    <!--<installDirectory>../frontend-app</installDirectory>-->
-                    <!--<srcdir>../frontend-app</srcdir>-->
+                    <workingDirectory>frontend</workingDirectory>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <webXml>web.xml</webXml>
-                    <webResources>
-                        <resource>
-                            <!-- this is relative to the pom.xml directory -->
-                            <directory>../frontend-app/dist</directory>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-
 
         </plugins>
         <finalName>${project.artifactId}</finalName>

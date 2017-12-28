@@ -1,4 +1,5 @@
 src/main/resources/application.properties
+src/main/resources/frontend-dist
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
