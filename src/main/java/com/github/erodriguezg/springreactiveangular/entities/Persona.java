@@ -1,74 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.erodriguezg.springreactiveangular.entities;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.*;
 
 /**
  *
  * @author eduar
  */
-@Entity
-@Table(name = "persona")
-@NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
-    , @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
-    , @NamedQuery(name = "Persona.findByRun", query = "SELECT p FROM Persona p WHERE p.run = :run")
-    , @NamedQuery(name = "Persona.findByNombres", query = "SELECT p FROM Persona p WHERE p.nombres = :nombres")
-    , @NamedQuery(name = "Persona.findByApellidoPaterno", query = "SELECT p FROM Persona p WHERE p.apellidoPaterno = :apellidoPaterno")
-    , @NamedQuery(name = "Persona.findByApellidoMaterno", query = "SELECT p FROM Persona p WHERE p.apellidoMaterno = :apellidoMaterno")
-    , @NamedQuery(name = "Persona.findByFechanacimiento", query = "SELECT p FROM Persona p WHERE p.fechanacimiento = :fechanacimiento")
-    , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
-    , @NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personaSeq")
-    @SequenceGenerator(name = "personaSeq", sequenceName = "persona_id_persona_seq", allocationSize = 1)
-    @Basic(optional = false)
-    @Column(name = "id_persona")
     private Long idPersona;
 
-    @OneToOne(mappedBy = "persona")
     private Usuario usuario;
 
-    @Basic(optional = false)
-    @Column(name = "run")
     private Integer run;
 
-    @Basic(optional = false)
-    @Column(name = "nombres")
     private String nombres;
 
-    @Basic(optional = false)
-    @Column(name = "apellido_paterno")
     private String apellidoPaterno;
 
-    @Basic(optional = false)
-    @Column(name = "apellido_materno")
     private String apellidoMaterno;
 
-    @Column(name = "fechanacimiento")
-    @Temporal(TemporalType.DATE)
     private Date fechanacimiento;
 
-    @Column(name = "telefono")
     private String telefono;
 
-    @Basic(optional = false)
-    @Column(name = "email")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name="id_comuna")
     private Comuna comuna;
 
     public Persona() {
@@ -165,7 +126,6 @@ public class Persona implements Serializable {
         this.usuario = usuario;
     }
 
-    @Transient
     public String getNombreCompleto() {
         return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
     }

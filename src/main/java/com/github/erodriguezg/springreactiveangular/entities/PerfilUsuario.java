@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.erodriguezg.springreactiveangular.entities;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
@@ -13,24 +7,14 @@ import java.util.Set;
 /**
  * @author eduar
  */
-@Entity
-@Table(name = "perfil_usuario")
-@NamedQueries({
-        @NamedQuery(name = "PerfilUsuario.findAll", query = "SELECT p FROM PerfilUsuario p order by nombre asc ")
-        , @NamedQuery(name = "PerfilUsuario.findByIdPerfilUsuario", query = "SELECT p FROM PerfilUsuario p WHERE p.idPerfilUsuario = :idPerfilUsuario")
-        , @NamedQuery(name = "PerfilUsuario.findByNombre", query = "SELECT p FROM PerfilUsuario p WHERE p.nombre = :nombre")})
 public class PerfilUsuario implements Serializable {
 
     private static final long serialVersionUID = -4539784086246915572L;
 
-    @Id
-    @Column(name = "id_perfil_usuario")
     private Integer idPerfilUsuario;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @OneToMany(mappedBy = "idPerfilUsuario")
     private Set<Usuario> usuarioSet;
 
     public PerfilUsuario() {

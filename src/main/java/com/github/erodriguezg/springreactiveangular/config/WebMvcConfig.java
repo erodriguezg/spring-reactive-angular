@@ -2,9 +2,9 @@ package com.github.erodriguezg.springreactiveangular.config;
 
 import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezg.javautils.DateUtils;
-import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.ErrorPageRegistrar;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
@@ -27,12 +26,11 @@ import java.util.EnumSet;
 
 @EnableWebMvc
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
-
+public class WebMvcConfig implements WebMvcConfigurer {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/", "classpath:/frontend-dist/" };
+            "classpath:/static/", "classpath:/public/", "classpath:/frontend-dist/"};
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -112,7 +110,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer() {
+    public ErrorPageRegistrar errorPageRegistrar() {
         return container -> {
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
             container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/access.html"));

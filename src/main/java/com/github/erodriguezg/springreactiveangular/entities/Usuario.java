@@ -1,47 +1,25 @@
 package com.github.erodriguezg.springreactiveangular.entities;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author eduar
  */
-@Entity
-@Table(name = "usuario")
-@NamedQueries({
-        @NamedQuery(name = "Usuario.findByEmail", query = "select u from Usuario u inner join u.persona p where p.email = :email"),
-        @NamedQuery(name = "Usuario.findByRun", query = "select u from Usuario u inner join u.persona p where p.run = :run "),
-        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-        , @NamedQuery(name = "Usuario.findByIdPersona", query = "SELECT u FROM Usuario u WHERE u.idPersona = :idPersona")
-        , @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username")
-        , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 7439126925283605347L;
 
-    @Id
     private Long idPersona;
 
-    @Basic(optional = false)
-    @Column(name = "username")
     private String username;
 
-    @Basic(optional = false)
-    @Column(name = "password")
     private String password;
 
-    @JoinColumn(name = "id_perfil_usuario", referencedColumnName = "id_perfil_usuario")
-    @ManyToOne(optional = false)
     private PerfilUsuario idPerfilUsuario;
 
-    @JoinColumn(name = "id_persona")
-    @OneToOne(optional = false)
-    @MapsId
     private Persona persona;
 
-    @Basic(optional = false)
-    @Column(name = "habilitado")
     private Boolean habilitado;
 
     public Usuario() {

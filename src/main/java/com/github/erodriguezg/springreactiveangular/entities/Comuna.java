@@ -1,27 +1,16 @@
 package com.github.erodriguezg.springreactiveangular.entities;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "comuna")
 public class Comuna implements Serializable {
 
     private static final long serialVersionUID = 6876833168788473163L;
 
-    @Id
-    @Column(name = "id_comuna")
     private Integer id;
 
-    @Length(max = 100)
-    @Column(name = "nombre")
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_provincia")
     private Provincia provincia;
 
     public Integer getId() {

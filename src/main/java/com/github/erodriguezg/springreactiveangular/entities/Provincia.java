@@ -1,24 +1,16 @@
 package com.github.erodriguezg.springreactiveangular.entities;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "provincia")
 public class Provincia implements Serializable {
 
     private static final long serialVersionUID = -4339008590656387006L;
 
-    @Id
-    @Column(name = "id_provincia")
     private Integer id;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_region")
     private Region region;
 
     public Integer getId() {

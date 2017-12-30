@@ -1,9 +1,3 @@
-#BASE DATOS
-app.db.jdbcurl=jdbc:postgresql://localhost:5432/reactive
-app.db.user=postgres
-app.db.password=postgres
-app.db.poolsize=10
-
 #PROFILE
 spring.profiles.active=development|production
 

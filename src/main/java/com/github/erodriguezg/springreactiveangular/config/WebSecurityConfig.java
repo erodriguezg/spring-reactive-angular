@@ -2,11 +2,7 @@ package com.github.erodriguezg.springreactiveangular.config;
 
 import com.github.erodriguezg.security.jwt.StatelessAuthenticationFilter;
 import com.github.erodriguezg.security.jwt.TokenAuthenticationHttpHandler;
-import com.github.erodriguezg.security.jwt.TokenService;
-import com.github.erodriguezg.springreactiveangular.security.SecurityMappings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.concurrent.TimeUnit;
+import javax.servlet.Filter;
 
 /**
  * @author eduardo
@@ -25,8 +21,12 @@ import java.util.concurrent.TimeUnit;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private Filter statelessAuthenticationFilter;
+
     @Autowired
-    private TokenAuthenticationHttpHandler jwtTokenAuthenticationHttpHandler;
+    public WebSecurityConfig(TokenAuthenticationHttpHandler jwtTokenAuthenticationHttpHandler) {
+        this.statelessAuthenticationFilter = new StatelessAuthenticationFilter(jwtTokenAuthenticationHttpHandler);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -57,28 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().cacheControl().disable()
                 .and()
-                .addFilterAt(new StatelessAuthenticationFilter(this.jwtTokenAuthenticationHttpHandler), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-    @Bean
-    public TokenAuthenticationHttpHandler jwtTokenAuthenticationHttpHandler(
-            TokenService tokenService, SecurityMappings securityMappings) {
-        return new TokenAuthenticationHttpHandler(
-                tokenService,
-                securityMappings::tokenSubjectMapToAuth,
-                securityMappings::authToTokenSubjectMap);
-    }
-
-    @Bean
-    public TokenService jwtTokenService(
-            @Value("${app.jwt.secret-phrase}") String jwtSecretPhrase,
-            @Value("${app.jwt.expiration-minutes}") Long jwtExpirationMinutes) {
-        return new TokenService(jwtSecretPhrase, TimeUnit.MINUTES, jwtExpirationMinutes);
-    }
-
-    @Bean
-    public SecurityMappings securityMappers() {
-        return new SecurityMappings();
-    }
-
 }
