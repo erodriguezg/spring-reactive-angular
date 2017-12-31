@@ -8,6 +8,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 @ChangeLog(order = "001")
+@SuppressWarnings("squid:S1192")
 public class V001RegionesProvinciasComunas {
 
     private static final String AUTHOR = "erodriguezg";
