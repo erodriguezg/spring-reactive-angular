@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <name>springreactiveangular</name>
-    <description>Spring Boot - Reactive - Angular</description>
+    <description>Spring Boot - Reactive - Angular (MongoDB 3.6) </description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
