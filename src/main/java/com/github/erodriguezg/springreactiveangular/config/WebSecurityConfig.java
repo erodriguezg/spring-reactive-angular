@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Allow anonymous logins
                 .antMatchers("/security/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .exceptionHandling()
                 .and()

@@ -1,26 +1,15 @@
-package com.github.erodriguezg.springreactiveangular.documents;
-
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.github.erodriguezg.springreactiveangular.services.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Document(collection = "regiones")
-public class Region implements Serializable {
+public class RegionDto implements Serializable {
 
-    private static final long serialVersionUID = 300006723213976827L;
+    private static final long serialVersionUID = -351862481296502114L;
 
     private Integer idRegion;
 
     private String nombre;
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public Integer getIdRegion() {
         return idRegion;
@@ -30,12 +19,20 @@ public class Region implements Serializable {
         this.idRegion = idRegion;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Region region = (Region) o;
-        return Objects.equals(idRegion, region.idRegion);
+        RegionDto regionDto = (RegionDto) o;
+        return Objects.equals(idRegion, regionDto.idRegion);
     }
 
     @Override
