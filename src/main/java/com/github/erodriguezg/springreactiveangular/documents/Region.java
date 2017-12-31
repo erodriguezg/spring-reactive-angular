@@ -1,10 +1,15 @@
-package com.github.erodriguezg.springreactiveangular.entities;
+package com.github.erodriguezg.springreactiveangular.documents;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document
 public class Region implements Serializable {
 
+    @Id
     private Integer id;
 
     private String nombre;

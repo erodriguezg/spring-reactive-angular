@@ -1,20 +1,22 @@
-package com.github.erodriguezg.springreactiveangular.entities;
+package com.github.erodriguezg.springreactiveangular.documents;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 /**
- *
  * @author eduar
  */
+@Document
 public class Persona implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8360753121986876095L;
 
+    @Id
     private Long idPersona;
-
-    private Usuario usuario;
 
     private Integer run;
 
@@ -30,7 +32,7 @@ public class Persona implements Serializable {
 
     private String email;
 
-    private Comuna comuna;
+    private Integer idComuna;
 
     public Persona() {
     }
@@ -110,20 +112,12 @@ public class Persona implements Serializable {
         this.email = email;
     }
 
-    public Comuna getComuna() {
-        return comuna;
+    public Integer getIdComuna() {
+        return idComuna;
     }
 
-    public void setComuna(Comuna comuna) {
-        this.comuna = comuna;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdComuna(Integer idComuna) {
+        this.idComuna = idComuna;
     }
 
     public String getNombreCompleto() {

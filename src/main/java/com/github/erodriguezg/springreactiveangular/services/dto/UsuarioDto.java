@@ -11,7 +11,7 @@ public class UsuarioDto implements Serializable {
 
     private static final long serialVersionUID = -1118062591140816905L;
 
-    private Long id;
+    private Long idPersona;
 
     private String username;
 
@@ -37,16 +37,16 @@ public class UsuarioDto implements Serializable {
         //vacio
     }
 
-    public UsuarioDto(Long id) {
-        this.id = id;
+    public UsuarioDto(Long idPersona) {
+        this.idPersona = idPersona;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
     }
 
-    public Long getId() {
-        return this.id;
+    public Long getIdPersona() {
+        return this.idPersona;
     }
 
     public void setRut(Integer rut) {
@@ -131,19 +131,15 @@ public class UsuarioDto implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        UsuarioDto usuario = (UsuarioDto) o;
-        return Objects.equals(this.id, usuario.id);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioDto that = (UsuarioDto) o;
+        return Objects.equals(username, that.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        return Objects.hash(username);
     }
 
 }

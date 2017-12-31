@@ -1,17 +1,22 @@
-package com.github.erodriguezg.springreactiveangular.entities;
+package com.github.erodriguezg.springreactiveangular.documents;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document
 public class Comuna implements Serializable {
 
-    private static final long serialVersionUID = 6876833168788473163L;
+    private static final long serialVersionUID = -23184362700093696L;
 
+    @Id
     private Integer id;
 
     private String nombre;
 
-    private Provincia provincia;
+    private Integer idProvincia;
 
     public Integer getId() {
         return id;
@@ -29,12 +34,12 @@ public class Comuna implements Serializable {
         this.nombre = nombre;
     }
 
-    public Provincia getProvincia() {
-        return provincia;
+    public Integer getIdProvincia() {
+        return idProvincia;
     }
 
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
+    public void setIdProvincia(Integer idProvincia) {
+        this.idProvincia = idProvincia;
     }
 
     @Override

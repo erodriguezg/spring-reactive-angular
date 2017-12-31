@@ -1,17 +1,22 @@
-package com.github.erodriguezg.springreactiveangular.entities;
+package com.github.erodriguezg.springreactiveangular.documents;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document
 public class Provincia implements Serializable {
 
-    private static final long serialVersionUID = -4339008590656387006L;
+    private static final long serialVersionUID = -6161963662951062510L;
 
+    @Id
     private Integer id;
 
     private String nombre;
 
-    private Region region;
+    private Integer idRegion;
 
     public Integer getId() {
         return id;
@@ -29,12 +34,12 @@ public class Provincia implements Serializable {
         this.nombre = nombre;
     }
 
-    public Region getRegion() {
-        return region;
+    public Integer getIdRegion() {
+        return idRegion;
     }
 
-    public void setRegion(Region region) {
-        this.region = region;
+    public void setIdRegion(Integer idRegion) {
+        this.idRegion = idRegion;
     }
 
     @Override

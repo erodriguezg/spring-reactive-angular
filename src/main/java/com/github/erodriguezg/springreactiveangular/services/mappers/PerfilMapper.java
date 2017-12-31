@@ -1,27 +1,27 @@
 package com.github.erodriguezg.springreactiveangular.services.mappers;
 
-import com.github.erodriguezg.springreactiveangular.entities.PerfilUsuario;
+import com.github.erodriguezg.springreactiveangular.documents.Perfil;
 import com.github.erodriguezg.springreactiveangular.services.dto.PerfilDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PerfilUsuarioMapper {
+public class PerfilMapper {
 
-    public PerfilDto toPerfilDto(PerfilUsuario entidad) {
+    public PerfilDto toPerfilDto(Perfil entidad) {
         PerfilDto dto = new PerfilDto();
         if(entidad != null) {
-            dto.setId(entidad.getIdPerfilUsuario());
+            dto.setId(entidad.getIdPerfil());
             dto.setNombre(entidad.getNombre());
         }
         return dto;
     }
 
-    public PerfilUsuario toPerfilUsuario(PerfilDto dto) {
-        PerfilUsuario entidad = new PerfilUsuario();
+    public Perfil toPerfilUsuario(PerfilDto dto) {
+        Perfil entidad = new Perfil();
         if(dto == null) {
             return null;
         }
-        entidad.setIdPerfilUsuario(dto.getId());
+        entidad.setIdPerfil(dto.getId());
         entidad.setNombre(dto.getNombre());
         return entidad;
     }

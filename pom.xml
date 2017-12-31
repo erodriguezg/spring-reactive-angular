@@ -111,6 +111,19 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- mongodb schema update -->
+
+        <dependency>
+            <groupId>com.github.mongobee</groupId>
+            <artifactId>mongobee</artifactId>
+            <version>0.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mongodb</groupId>
+                    <artifactId>mongo-java-driver</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- erodriguezg libs -->
 

@@ -1,6 +1,6 @@
 package com.github.erodriguezg.springreactiveangular.dao;
 
-import com.github.erodriguezg.springreactiveangular.entities.PerfilUsuario;
+import com.github.erodriguezg.springreactiveangular.documents.Perfil;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class PerfilUsuarioDao {
 
-    public List<PerfilUsuario> traerTodos() {
+    public List<Perfil> traerTodos() {
         return null;
     }
 

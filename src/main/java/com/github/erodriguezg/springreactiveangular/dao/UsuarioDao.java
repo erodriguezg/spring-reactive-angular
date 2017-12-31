@@ -1,6 +1,6 @@
 package com.github.erodriguezg.springreactiveangular.dao;
 
-import com.github.erodriguezg.springreactiveangular.entities.Usuario;
+import com.github.erodriguezg.springreactiveangular.documents.Usuario;
 import com.github.erodriguezg.springreactiveangular.services.dto.UsuarioFiltroDto;
 import org.springframework.stereotype.Repository;
 
