@@ -5,10 +5,12 @@ import com.github.erodriguezg.security.jwt.TokenAuthenticationHttpHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.Filter;
@@ -17,8 +19,8 @@ import javax.servlet.Filter;
  * @author eduardo
  */
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebFluxSecurity
+@EnableReactiveMethodSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private Filter statelessAuthenticationFilter;
@@ -36,6 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/hello").permitAll()
+                .antMatchers("/hello-protected").authenticated()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/*.html", "**/*.html").permitAll()
                 .antMatchers("/*.js", "**/*.js").permitAll()

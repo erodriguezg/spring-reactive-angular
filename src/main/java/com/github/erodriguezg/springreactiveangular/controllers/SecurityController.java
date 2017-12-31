@@ -10,10 +10,11 @@ import com.github.erodriguezg.springreactiveangular.services.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -39,8 +40,8 @@ public class SecurityController {
     @Autowired
     private SecurityMappings securityMappings;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public RespuestaLoginDto login(@RequestBody CredencialesDto credenciales) {
+    @GetMapping("/login")
+    public Mono<RespuestaLoginDto> login(@RequestBody CredencialesDto credenciales) {
         RespuestaLoginDto respuestaLoginDto = new RespuestaLoginDto();
         Integer rutEntero = Integer.valueOf(credenciales.getRut().trim().split("-")[0].replaceAll("\\.", ""));
         UsuarioDto usuarioDto = this.usuarioService.traerPorRun(rutEntero);
@@ -53,20 +54,20 @@ public class SecurityController {
             respuestaLoginDto.setExitoLogin(true);
             respuestaLoginDto.setErrores(null);
         }
-        return respuestaLoginDto;
+        return Mono.just(respuestaLoginDto);
     }
 
-    @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
-    public String refreshToken() {
+    @GetMapping("/refreshToken")
+    public Mono<String> refreshToken() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return tokenService.create(securityMappings.authToTokenSubjectMap(auth));
+        String token = tokenService.create(securityMappings.authToTokenSubjectMap(auth));
+        return Mono.just(token);
     }
 
     private Optional<String> validarCredenciales(CredencialesDto credenciales, UsuarioDto usuarioDto) {
         if (usuarioDto == null) {
             return Optional.of(ERROR_LOGIN);
         }
-
         String passMD5 = codecUtils.generarHash(CodecUtils.TypeHash.MD5, credenciales.getPassword());
         if (!passMD5.equals(usuarioDto.getPassword())) {
             return Optional.of(ERROR_LOGIN);

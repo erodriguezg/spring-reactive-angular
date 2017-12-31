@@ -1,15 +1,17 @@
 package com.github.erodriguezg.springreactiveangular.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @GetMapping("/hello")
     public String hello() {
         return "Hello world";
     }
+
+    @GetMapping("/hello-protected")
+    public String helloProtected() { return "Hello World Protected"; }
 
 }

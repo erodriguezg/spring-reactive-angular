@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -24,9 +25,9 @@ import java.util.EnumSet;
  * Created by eduar on 15/05/2017.
  */
 
-@EnableWebMvc
+@EnableWebFlux
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
