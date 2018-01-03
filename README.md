@@ -17,6 +17,5 @@ Reactive Stack with Angular View
 * curl -H "Accept: application/stream+json" 
 * curl -H "Accept: text/event-stream" (no funciona con MONO, solo FLUX)
 
-
 ## HERRAMIENTAS
 * MONGODB Client: Robo 3T 1.1
