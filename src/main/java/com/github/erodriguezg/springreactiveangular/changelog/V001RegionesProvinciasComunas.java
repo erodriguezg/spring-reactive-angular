@@ -16,6 +16,7 @@ public class V001RegionesProvinciasComunas {
     @ChangeSet(order = "01", id = "crearRegiones", author = AUTHOR)
     public void crearRegiones(DB db) {
         DBCollection collection = db.createCollection("regiones", null);
+        collection.createIndex(new BasicDBObject("idRegion", 1), new BasicDBObject("unique", true));
         collection.insert(
                 createRegion(1, "Tarapacá"),
                 createRegion(2, "Antofagasta"),
@@ -38,6 +39,7 @@ public class V001RegionesProvinciasComunas {
     @ChangeSet(order = "02", id = "crearProvincias", author = AUTHOR)
     public void crearProvincias(DB db) {
         DBCollection collection = db.createCollection("provincias", null);
+        collection.createIndex(new BasicDBObject("idProvincia", 1), new BasicDBObject("unique", true));
         collection.insert(
                 createProvincia(11, "Iquique", 1),
                 createProvincia(14, "Tamarugal", 1),
@@ -99,6 +101,7 @@ public class V001RegionesProvinciasComunas {
     @ChangeSet(order = "03", id = "crearComunas", author = AUTHOR)
     public void crearComuna(DB db) {
         DBCollection collection = db.createCollection("comunas", null);
+        collection.createIndex(new BasicDBObject("idComuna", 1), new BasicDBObject("unique", true));
         collection.insert(
                 createComuna(1101, "Iquique", 11),
                 createComuna(1107, "Alto Hospicio", 11),

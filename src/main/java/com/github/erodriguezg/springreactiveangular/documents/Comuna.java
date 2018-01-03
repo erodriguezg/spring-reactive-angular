@@ -1,9 +1,12 @@
 package com.github.erodriguezg.springreactiveangular.documents;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Document(collection = "comunas")
@@ -12,10 +15,16 @@ public class Comuna implements Serializable {
     private static final long serialVersionUID = 5336070918658202149L;
 
     @Id
+    private BigInteger id;
+
+    @Indexed(unique = true)
+    @Field("idComuna")
     private Integer idComuna;
 
+    @Field("nombre")
     private String nombre;
 
+    @Field("idProvincia")
     private Integer idProvincia;
 
     public String getNombre() {
@@ -40,6 +49,14 @@ public class Comuna implements Serializable {
 
     public void setIdComuna(Integer idComuna) {
         this.idComuna = idComuna;
+    }
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     @Override

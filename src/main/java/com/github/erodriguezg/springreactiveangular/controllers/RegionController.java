@@ -22,7 +22,8 @@ public class RegionController {
     @PreAuthorize("permitAll()")
     public Flux<ResponseEntity<RegionDto>> traerTodas() {
         return regionProvinciaComunaService.traerRegionasTodas()
-                .map(regionDto -> new ResponseEntity<>(regionDto, HttpStatus.OK));
+                .map(regionDto -> new ResponseEntity<>(regionDto, HttpStatus.OK))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
 }

@@ -23,14 +23,14 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
+    private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
 
     @Autowired
     private UsuarioService usuarioService;
 
     @RequestMapping(value = "/buscar", method = RequestMethod.POST)
     public List<UsuarioDto> buscar(@RequestBody UsuarioFiltroDto filtros) {
-        LOG.debug("-> buscar");
+        log.debug("-> buscar");
         return this.usuarioService.buscar(filtros);
     }
 

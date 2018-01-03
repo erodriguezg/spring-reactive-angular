@@ -5,10 +5,12 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface ComunaRepository extends ReactiveMongoRepository<Comuna, Integer> {
+import java.math.BigInteger;
 
-    Mono<Comuna> findById(Integer idComuna);
+public interface ComunaRepository extends ReactiveMongoRepository<Comuna, BigInteger> {
 
-    Flux<Comuna> findComunaByIdProvinciaIs(Integer idProvincia);
+    Mono<Comuna> findByIdComuna(Integer idComuna);
+
+    Flux<Comuna> findByIdProvincia(Integer idProvincia);
 
 }

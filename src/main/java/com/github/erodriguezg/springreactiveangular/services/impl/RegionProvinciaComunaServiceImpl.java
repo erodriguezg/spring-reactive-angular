@@ -39,7 +39,13 @@ public class RegionProvinciaComunaServiceImpl implements RegionProvinciaComunaSe
 
     @Override
     public Flux<ComunaDto> traerComunasPorProvincia(ProvinciaDto provinciaDto) {
-        return comunaRepository.findComunaByIdProvinciaIs(provinciaDto.getIdProvincia())
+        return comunaRepository.findByIdProvincia(provinciaDto.getIdProvincia())
+                .flatMap(comuna -> Mono.just(comunaMapper.toDto(comuna)));
+    }
+
+    @Override
+    public Mono<ComunaDto> traerComunaPorIdComuna(Integer idComuna) {
+        return comunaRepository.findByIdComuna(idComuna)
                 .flatMap(comuna -> Mono.just(comunaMapper.toDto(comuna)));
     }
 
