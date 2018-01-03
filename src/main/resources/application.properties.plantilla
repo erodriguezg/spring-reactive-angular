@@ -13,4 +13,6 @@ app.jwt.secret-phrase=frase-secreta-jwt-cambiame
 app.jwt.expiration-minutes=5
 
 #LOGGER
-logging.level.com.github.erodriguezg=debug
+logging.level.com.github.erodriguezg=DEBUG
+logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
+logging.level.org.springframework.data.mongodb.core.ReactiveMongoTemplate=DEBUG
