@@ -1,33 +1,48 @@
 package com.github.erodriguezg.springreactiveangular.documents;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Objects;
 
 /**
  * @author eduar
  */
-@Document
+@Document(collection = "usuarios")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = -696025121548956252L;
 
     @Id
+    private BigInteger id;
+
+    @NotBlank
+    @Indexed(unique = true)
+    @Field("username")
     private String username;
 
+    @NotBlank
+    @Field("password")
     private String password;
 
-    private Long idPersona;
+    @NotNull
+    @Indexed(unique = true)
+    @Field("runPersona")
+    private Integer runPersona;
 
+    @NotNull
+    @Field("idPerfil")
     private Integer idPerfil;
 
+    @NotNull
+    @Field("habilitado")
     private Boolean habilitado;
-
-    public Usuario() {
-        //empty
-    }
 
     public String getUsername() {
         return username;
@@ -45,12 +60,12 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public Long getIdPersona() {
-        return idPersona;
+    public Integer getRunPersona() {
+        return runPersona;
     }
 
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
+    public void setRunPersona(Integer runPersona) {
+        this.runPersona = runPersona;
     }
 
     public Integer getIdPerfil() {

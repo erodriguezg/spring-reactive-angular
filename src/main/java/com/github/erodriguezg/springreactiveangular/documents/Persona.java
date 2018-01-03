@@ -1,59 +1,69 @@
 package com.github.erodriguezg.springreactiveangular.documents;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * @author eduar
  */
-@Document
+@Document(collection = "personas")
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 8360753121986876095L;
 
     @Id
-    private Long idPersona;
+    private BigInteger id;
 
+    @NotNull
+    @Indexed(unique = true)
+    @Field("run")
     private Integer run;
 
-    private String nombres;
-
-    private String apellidoPaterno;
-
-    private String apellidoMaterno;
-
-    private Date fechanacimiento;
-
-    private String telefono;
-
+    @NotBlank
+    @Indexed(unique = true)
+    @Field("email")
     private String email;
 
+    @NotBlank
+    @Field("nombres")
+    private String nombres;
+
+    @NotBlank
+    @Field("apellidoPaterno")
+    private String apellidoPaterno;
+
+    @NotBlank
+    @Field("apellidoMaterno")
+    private String apellidoMaterno;
+
+    @Field("fechaNacimiento")
+    private Date fechaNacimiento;
+
+    @Field("telefono")
+    private String telefono;
+
+    @Field("idComuna")
     private Integer idComuna;
 
     public Persona() {
     }
 
-    public Persona(Long idPersona) {
-        this.idPersona = idPersona;
+    public BigInteger getId() {
+        return id;
     }
 
-    public Persona(Long idPersona, String nombres, String apellidoPaterno, String email) {
-        this.idPersona = idPersona;
-        this.nombres = nombres;
-        this.apellidoPaterno = apellidoPaterno;
-        this.email = email;
-    }
-
-    public Long getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     public Integer getRun() {
@@ -88,12 +98,12 @@ public class Persona implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public Date getFechanacimiento() {
-        return fechanacimiento;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getTelefono() {
@@ -120,6 +130,7 @@ public class Persona implements Serializable {
         this.idComuna = idComuna;
     }
 
+    @Transient
     public String getNombreCompleto() {
         return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
     }
@@ -129,25 +140,11 @@ public class Persona implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Persona persona = (Persona) o;
-        return Objects.equals(idPersona, persona.idPersona);
+        return Objects.equals(run, persona.run);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPersona);
-    }
-
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "idPersona=" + idPersona +
-                ", run=" + run +
-                ", nombres='" + nombres + '\'' +
-                ", apellidoPaterno='" + apellidoPaterno + '\'' +
-                ", apellidoMaterno='" + apellidoMaterno + '\'' +
-                ", fechanacimiento=" + fechanacimiento +
-                ", telefono='" + telefono + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return Objects.hash(run);
     }
 }

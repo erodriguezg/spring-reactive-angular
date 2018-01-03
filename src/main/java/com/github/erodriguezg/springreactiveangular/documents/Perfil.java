@@ -1,22 +1,30 @@
 package com.github.erodriguezg.springreactiveangular.documents;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Objects;
 
 /**
  * @author eduar
  */
-@Document
+@Document(collection = "perfiles")
 public class Perfil implements Serializable {
 
     private static final long serialVersionUID = -4539784086246915572L;
 
     @Id
+    private BigInteger id;
+
+    @Indexed(unique = true)
+    @Field("idPerfil")
     private Integer idPerfil;
 
+    @Field("nombre")
     private String nombre;
 
     public Perfil() {
@@ -26,9 +34,12 @@ public class Perfil implements Serializable {
         this.idPerfil = idPerfil;
     }
 
-    public Perfil(Integer idPerfil, String nombre) {
-        this.idPerfil = idPerfil;
-        this.nombre = nombre;
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     public Integer getIdPerfil() {

@@ -24,9 +24,8 @@ public class UsuarioMapper {
         dto.setApMaterno(persona.getApellidoMaterno());
         dto.setApPaterno(persona.getApellidoPaterno());
         dto.setEmail(persona.getEmail());
-        dto.setFechaNacimiento(persona.getFechanacimiento());
+        dto.setFechaNacimiento(persona.getFechaNacimiento());
         dto.setHabilitado(usuario.getHabilitado());
-        dto.setIdPersona(persona.getIdPersona());
         dto.setNombres(persona.getNombres());
         dto.setPassword(usuario.getPassword());
         dto.setPerfil(perfilMapper.toPerfilDto(perfil));
@@ -41,13 +40,12 @@ public class UsuarioMapper {
         }
         Usuario usuario = new Usuario();
         Persona persona = new Persona();
-        usuario.setIdPersona(dto.getIdPersona());
+        usuario.setRunPersona(dto.getRut());
         usuario.setIdPerfil(dto.getPerfil().getId());
         persona.setApellidoMaterno(dto.getApMaterno());
         persona.setApellidoPaterno(dto.getApPaterno());
         persona.setEmail(dto.getEmail());
-        persona.setFechanacimiento(dto.getFechaNacimiento());
-        persona.setIdPersona(dto.getIdPersona());
+        persona.setFechaNacimiento(dto.getFechaNacimiento());
         persona.setNombres(dto.getNombres());
         persona.setRun(dto.getRut());
         usuario.setUsername(dto.getUsername());

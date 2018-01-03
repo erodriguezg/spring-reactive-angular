@@ -9,8 +9,6 @@ Reactive Stack with Angular View
 
 ### Comandos Backend:
 * Run Backend) spring-boot:run -Duser.language=es -Duser.region=CL -Dfile.encoding=UTF-8
-* Limpiar BD) flyway:clean -Dplugin.flyway.url=jdbc:postgresql://localhost:5432/bd -Dplugin.flyway.user=postgres -Dplugin.flyway.password=postgres
-* Ejecutar Parches BD) flyway:migrate -Dplugin.flyway.url=jdbc:postgresql://localhost:5432/bd -Dplugin.flyway.user=postgres -Dplugin.flyway.password=postgres
 
 ### Spring Data Reference
 https://docs.spring.io/spring-data/data-mongodb/docs/2.0.2.RELEASE/reference/html/
