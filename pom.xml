@@ -23,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <version.java>1.8</version.java>
 
-        <sonar.cpd.exclusions>src/main/java/com/github/erodriguezg/springreactiveangular/entities/**/*,src/main/java/com/github/erodriguezg/springreactiveangular/services/dto/**/*</sonar.cpd.exclusions>
+        <sonar.cpd.exclusions>src/main/java/com/github/erodriguezgarq/springreactiveangular/entities/**/*,src/main/java/com/github/erodriguezgarq/springreactiveangular/services/dto/**/*</sonar.cpd.exclusions>
 
         <plugin.flyway.version>4.2.0</plugin.flyway.version>
         <plugin.flyway.url>jdbc:postgresql://localhost:5432/springboot-swf</plugin.flyway.url>
