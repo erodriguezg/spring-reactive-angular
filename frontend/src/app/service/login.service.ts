@@ -1,14 +1,15 @@
-import {Injectable} from '@angular/core';
-import {ApiHttp} from '../http/api-http';
-import {Response, URLSearchParams, Http} from '@angular/http';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Rx';
-import {SessionStorage} from 'ng2-webstorage';
-import {Sesion} from '../domain/sesion';
-import {CredencialesDto} from '../dto/credenciales.dto';
-import {RespuestaLoginDto} from '../dto/respuesta-login.dto';
-import {Idle} from '@ng-idle/core';
-import {ENVIRONMENT} from 'environments/environment';
+import { Injectable } from '@angular/core';
+import { ApiHttp } from '../http/api-http';
+import { Response, URLSearchParams, Http } from '@angular/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
+import { SessionStorage } from 'ng2-webstorage';
+import { Sesion } from '../domain/sesion';
+import { CredencialesDto } from '../dto/credenciales.dto';
+import { RespuestaLoginDto } from '../dto/respuesta-login.dto';
+import { RefreshTokenDto } from '../dto/refresh-token.dto';
+import { Idle } from '@ng-idle/core';
+import { ENVIRONMENT } from 'environments/environment';
 
 @Injectable()
 export class LoginService {
@@ -30,15 +31,15 @@ export class LoginService {
             password: password
         };
         return this.http.post('security/login', JSON.stringify(credenciales))
-                    .map((res: Response) => {
-                        const resp: RespuestaLoginDto = res.json();
+            .map((res: Response) => {
+                const resp: RespuestaLoginDto = res.json();
 
-                        if (resp.exitoLogin) {
-                            this.procesarToken(resp.token);
-                            this.idle.watch();
-                        }
-                        return resp;
-                    });
+                if (resp.exitoLogin) {
+                    this.procesarToken(resp.token);
+                    this.idle.watch();
+                }
+                return resp;
+            });
     }
 
     private procesarToken(token: string) {
@@ -63,16 +64,16 @@ export class LoginService {
         this.refreshTokenTimer = null;
     }
 
-    public refrescarToken(): Observable<string> {
+    public refrescarToken(): Observable<RefreshTokenDto> {
         if (!this.isLogged()) {
             return Observable.create(undefined);
         } else {
-            return this.httpNoIntercept.get(ENVIRONMENT.API_URL + 'security/refreshToken', this.http.getCustomRequestOptions())
-                    .map((res: Response) => {
-                        const resp: string = res.json();
-                        this.procesarToken(resp);
-                        return resp;
-                    });
+            return this.http.post('security/refreshToken', null)
+                .map((res: Response) => {
+                    const resp: RefreshTokenDto = <RefreshTokenDto>res.json();
+                    this.procesarToken(resp.token);
+                    return resp;
+                });
         }
     }
 
@@ -98,10 +99,7 @@ export class LoginService {
     }
 
     public getFullName(): string {
-        return this.sesion.data.nombrePersona + ' ' + this.sesion.data.apellidoPaterno;
+        return this.sesion.data.nombres + ' ' + this.sesion.data.apellidos;
     }
 
-    public isNew(): boolean {
-        return this.sesion.data.estadoId === 3;
-    }
 }

@@ -3,6 +3,7 @@ package com.github.erodriguezgarq.springreactiveangular.controllers;
 import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezg.security.jwt.TokenService;
 import com.github.erodriguezgarq.springreactiveangular.controllers.dto.CredencialesDto;
+import com.github.erodriguezgarq.springreactiveangular.controllers.dto.RefreshTokenDto;
 import com.github.erodriguezgarq.springreactiveangular.controllers.dto.RespuestaLoginDto;
 import com.github.erodriguezgarq.springreactiveangular.security.SecurityMappings;
 import com.github.erodriguezgarq.springreactiveangular.services.UsuarioService;
@@ -62,11 +63,13 @@ public class SecurityController {
     }
 
     @PostMapping("/refreshToken")
-    public Mono<ResponseEntity<String>> refreshToken() {
+    public Mono<ResponseEntity<RefreshTokenDto>> refreshToken() {
         return Mono.just(SecurityContextHolder.getContext().getAuthentication())
                 .flatMap(auth -> {
                     String token = tokenService.create(securityMappings.authToTokenSubjectMap(auth));
-                    return Mono.just(new ResponseEntity<>(token, HttpStatus.OK));
+                    RefreshTokenDto refreshTokenDto = new RefreshTokenDto();
+                    refreshTokenDto.setToken(token);
+                    return Mono.just(new ResponseEntity<>(refreshTokenDto, HttpStatus.OK));
                 })
                 .defaultIfEmpty(ResponseEntity.notFound().build())
                 .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
