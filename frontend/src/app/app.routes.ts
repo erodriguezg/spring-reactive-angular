@@ -9,8 +9,6 @@ import { NotLoggedGuard } from './guard/not-logged.guard';
 import { LoginView } from './view/login.view';
 import { StartView } from './view/start.view';
 import { GestionarUsuariosView } from './view/gestionar-usuarios.view';
-import { RegistrarComunidadView } from './view/registrar-comunidad.view';
-import { MisComunidadesView } from './view/mis-comunidades.view';
 
 export const routes: Routes = [
     { path: '', component: LoginView, canActivate: [NotLoggedGuard] },

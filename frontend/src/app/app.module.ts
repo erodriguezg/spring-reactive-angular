@@ -90,15 +90,12 @@ import { ScrollTopComponent } from './component/scroll-top.component';
 import { LoginView } from './view/login.view';
 import { StartView } from './view/start.view';
 import { GestionarUsuariosView } from './view/gestionar-usuarios.view';
-import { RegistrarComunidadView } from './view/registrar-comunidad.view';
-import { MisComunidadesView } from './view/mis-comunidades.view';
 
 // Servicios
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { LoadingService } from './service/loading.service';
 import { LoginService } from './service/login.service';
 import { UsuariosService } from './service/usuarios.service';
-import { ComunidadService } from './service/comunidad.service';
 import { TerritorioService } from './service/territorio.service';
 
 // Guards
@@ -196,9 +193,7 @@ export function apiHttpServiceFactory(backend: XHRBackend, defaultOptions: Reque
         // Vistas
         LoginView,
         StartView,
-        GestionarUsuariosView,
-        RegistrarComunidadView,
-        MisComunidadesView
+        GestionarUsuariosView
     ],
     providers: [
         {
@@ -219,8 +214,7 @@ export function apiHttpServiceFactory(backend: XHRBackend, defaultOptions: Reque
         LoadingService,
         LoginService,
         UsuariosService,
-        TerritorioService,
-        ComunidadService
+        TerritorioService
     ],
     bootstrap: [AppComponent]
 })
