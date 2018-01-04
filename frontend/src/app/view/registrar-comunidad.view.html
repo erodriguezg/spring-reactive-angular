@@ -1,0 +1,112 @@
+<h1>Registrar Comunidad</h1>
+
+<form *ngIf="comunidadForm" [formGroup]="comunidadForm" >
+
+    <p-fieldset legend="Identificación">
+
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <span style="color:red">*</span><label>Nombre Comunidad:</label>
+            </div>
+            <div class="ui-g-3">
+                <input type="text" pInputText class="form-control" formControlName="nombre" />
+                <div class="ui-message ui-messages-error ui-corner-all" 
+                    [hidden]="comunidadForm.controls.nombre.valid || (comunidadForm.controls.nombre.pristine && !submitted)">
+                    <i class="fa fa-close"></i>
+                    <span *ngIf="comunidadForm.controls.nombre.pending">Se esta procesando...</span>
+                    <span *ngIf="comunidadForm.controls.nombre.hasError('required')">El campo es obligatorio</span>
+                    <span *ngIf="comunidadForm.controls.nombre.hasError('maxlength')">Sobre el limite de N caracteres permitidos</span>
+                    <span *ngIf="comunidadForm.controls.nombre.hasError('minlength')">Bajo el limite de N caracteres permitidos</span>
+                    <span *ngIf="comunidadForm.controls.nombre.hasError('nombreUnico')">Nombre no disponible</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <span style="color:red">*</span><label>Rol Comunidad:</label>
+            </div>
+            <div class="ui-g-3">
+                <input type="text" pInputText class="form-control" formControlName="rol" />
+                <div class="ui-message ui-messages-error ui-corner-all" 
+                    [hidden]="comunidadForm.controls.rol.valid || (comunidadForm.controls.rol.pristine && !submitted)">
+                    <i class="fa fa-close"></i>
+                    <span *ngIf="comunidadForm.controls.rol.hasError('required')">El campo es obligatorio</span>
+                    <span *ngIf="comunidadForm.controls.rol.hasError('maxlength')">Sobre el limite de N caracteres permitidos</span>
+                    <span *ngIf="comunidadForm.controls.rol.hasError('minlength')">Bajo el limite de N caracteres permitidos</span>
+                </div>
+            </div>
+        </div>
+
+    </p-fieldset>
+
+    <p-fieldset legend="Ubicación">
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <span style="color:red">*</span><label>Región:</label>
+            </div>
+            <div class="ui-g-3">
+                <p-dropdown [options]="regionSelectItems" formControlName="regionDto" [style]="{'width':'317px'}" (onChange)="changeRegionListener()"></p-dropdown>
+                <div class="ui-message ui-messages-error ui-corner-all" 
+                    [hidden]="comunidadForm.controls.regionDto.valid || (comunidadForm.controls.regionDto.pristine && !submitted)">
+                    <i class="fa fa-close"></i>
+                    <span *ngIf="comunidadForm.controls.regionDto.hasError('required')">El campo es obligatorio</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <span style="color:red">*</span><label>Provincia:</label>
+            </div>
+            <div class="ui-g-3">
+                <p-dropdown [options]="provinciaSelectItems" formControlName="provinciaDto" [style]="{'width':'317px'}" (onChange)="changeProvinciaListener()"></p-dropdown>
+                <div class="ui-message ui-messages-error ui-corner-all" 
+                    [hidden]="comunidadForm.controls.provinciaDto.valid || (comunidadForm.controls.provinciaDto.pristine && !submitted)">
+                    <i class="fa fa-close"></i>
+                    <span *ngIf="comunidadForm.controls.provinciaDto.hasError('required')">El campo es obligatorio</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <span style="color:red">*</span><label>Comuna:</label>
+            </div>
+            <div class="ui-g-3">
+                <p-dropdown [options]="comunaSelectItems" formControlName="comunaDto" [style]="{'width':'317px'}"></p-dropdown>
+                <div class="ui-message ui-messages-error ui-corner-all" 
+                    [hidden]="comunidadForm.controls.comunaDto.valid || (comunidadForm.controls.comunaDto.pristine && !submitted)">
+                    <i class="fa fa-close"></i>
+                    <span *ngIf="comunidadForm.controls.comunaDto.hasError('required')">El campo es obligatorio</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <span style="color:red">*</span><label>Dirección:</label>
+            </div>
+            <div class="ui-g-3">
+                <input type="text" pInputText class="form-control" formControlName="direccion" />
+                <div class="ui-message ui-messages-error ui-corner-all" 
+                    [hidden]="comunidadForm.controls.direccion.valid || (comunidadForm.controls.direccion.pristine && !submitted)">
+                    <i class="fa fa-close"></i>
+                    <span *ngIf="comunidadForm.controls.direccion.hasError('required')">El campo es obligatorio</span>
+                    <span *ngIf="comunidadForm.controls.direccion.hasError('maxlength')">Sobre el limite de N caracteres permitidos</span>
+                    <span *ngIf="comunidadForm.controls.direccion.hasError('minlength')">Bajo el limite de N caracteres permitidos</span>
+                </div>
+            </div>
+        </div>
+
+    </p-fieldset>
+
+    <div class="botonera">
+        <button type="button" (click)="confirmRegistrar()" pButton icon="fa-check" label="Aceptar"></button>
+        <button type="button" (click)="cancel()" pButton icon="fa-check" label="Cancelar"></button>
+    </div>
+
+    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+    <p-growl [(value)]="msgs"></p-growl>
+
+</form>

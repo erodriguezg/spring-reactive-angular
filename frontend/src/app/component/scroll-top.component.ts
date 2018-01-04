@@ -9,8 +9,7 @@ import {Component, HostListener} from '@angular/core';
 })
 export class ScrollTopComponent {
 
-    public show: boolean;
-    
+    private show: boolean;
     constructor() {
         this.show = false;
      }

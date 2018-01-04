@@ -10,7 +10,7 @@ import {UsuariosService} from '../service/usuarios.service';
 // tslint:disable-next-line:component-class-suffix
 export class GestionarUsuariosView implements OnInit {
 
-    public usuarios: Usuario[];
+    private usuarios: Usuario[];
     private filtros: UsuarioFiltroDto;
 
     constructor(private usuarioService: UsuariosService) { }

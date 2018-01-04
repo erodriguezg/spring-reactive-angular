@@ -1,4 +1,5 @@
 import {Component, AfterViewInit, OnDestroy, ElementRef, Renderer, ViewChild} from '@angular/core';
+import {LoginService} from './service/login.service';
 
 enum MenuOrientation {
     STATIC,
@@ -16,7 +17,7 @@ declare var jQuery: any;
 export class AppComponent implements AfterViewInit, OnDestroy {
 
     layoutCompact = true;
-    layoutMode: MenuOrientation = MenuOrientation.HORIZONTAL;
+    layoutMode: MenuOrientation = MenuOrientation.STATIC;
     darkMenu= false;
     profileMode = 'inline';
     rotateMenuButton: boolean;
@@ -36,7 +37,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
-    constructor(public renderer: Renderer) {}
+    constructor(public renderer: Renderer, private loginService: LoginService) {}
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;

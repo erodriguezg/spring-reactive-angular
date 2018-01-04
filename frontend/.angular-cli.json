@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "angular-spa"
+    "name": "ultima-cli"
   },
   "apps": [
     {
@@ -23,18 +23,16 @@
         "../node_modules/fullcalendar/dist/fullcalendar.min.css",
         "../node_modules/quill/dist/quill.snow.css",
         "../node_modules/nanoscroller/bin/css/nanoscroller.css",
-        "assets/theme/theme.scss",
-        "assets/layout/css/layout.scss",
         "styles.scss"
       ],
       "scripts": [
-          "../node_modules/jquery/dist/jquery.js",
-          "../node_modules/nanoscroller/bin/javascripts/jquery.nanoscroller.js",
-          "assets/layout/js/ripple.js",
-          "../node_modules/moment/moment.js",
-          "../node_modules/chart.js/dist/Chart.js",
-          "../node_modules/fullcalendar/dist/fullcalendar.js",
-          "../node_modules/quill/dist/quill.js"
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/nanoscroller/bin/javascripts/jquery.nanoscroller.js",
+        "assets/layout/js/ripple.js",
+        "../node_modules/moment/moment.js",
+        "../node_modules/chart.js/dist/Chart.js",
+        "../node_modules/fullcalendar/dist/fullcalendar.js",
+        "../node_modules/quill/dist/quill.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -10,7 +10,7 @@ import {LoginService} from './service/login.service';
                 <div class="logo"></div>
             </div>
 
-            <div *ngIf="isLogged()" class="topbar-right">
+            <div *ngIf="loginService.isLogged()" class="topbar-right">
                 <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
                     <i></i>
                 </a>
@@ -177,8 +177,4 @@ export class AppTopBar {
         @Inject(forwardRef(() => AppComponent)) public app: AppComponent,
         private loginService: LoginService
         ) { }
-
-    public isLogged(): boolean {
-        return this.loginService.isLogged();
-    }
 }

@@ -7,15 +7,15 @@ import {Router} from '@angular/router';
 })
 // tslint:disable-next-line:component-class-suffix
 export class LoginView {
-    public username: string;
-    public password: string;
-    public msgs = [];
+    private username: string;
+    private password: string;
+    private msgs = [];
 
     constructor(private loginService: LoginService, private router: Router) {
         this.loginService.logoutNoNavigate();
     }
 
-    public login() {
+    private login() {
         this.loginService.login(this.username, this.password).subscribe(res => {
             if (res.exitoLogin) {
                 this.router.navigate(['start']);

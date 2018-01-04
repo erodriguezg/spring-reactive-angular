@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {MenuItem} from 'primeng/primeng';
 import {AppComponent} from './app.component';
+import {LoginService} from './service/login.service';
 
 @Component({
     selector: 'inline-profile',
@@ -37,8 +38,8 @@ import {AppComponent} from './app.component';
                     <span>Settings</span>
                 </a>
             </li>
-            <li role="menuitem">
-                <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
+            <li  *ngIf="loginService.isLogged()" role="menuitem">
+                <a href="#" (click)="logout()" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
                     <i class="material-icons">power_settings_new</i>
                     <span>Logout</span>
                 </a>
@@ -62,8 +63,14 @@ export class InlineProfileComponent {
 
     active: boolean;
 
-    onClick(event) {
+    constructor(private loginService: LoginService) {}
+
+    public onClick(event) {
         this.active = !this.active;
         event.preventDefault();
+    }
+
+    public logout(): void {
+        this.loginService.logout();
     }
 }

@@ -1,21 +1,22 @@
-import {Routes, RouterModule} from '@angular/router';
-import {ModuleWithProviders} from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
 
 // Navigation Guards
-import {AuthGuard} from './guard/auth.guard';
-import {NotLoggedGuard} from './guard/not-logged.guard';
+import { AuthGuard } from './guard/auth.guard';
+import { NotLoggedGuard } from './guard/not-logged.guard';
 
 // Vistas
-import {LoginView} from './view/login.view';
-import {StartView} from './view/start.view';
-import {GestionarUsuariosView} from './view/gestionar-usuarios.view';
+import { LoginView } from './view/login.view';
+import { StartView } from './view/start.view';
+import { GestionarUsuariosView } from './view/gestionar-usuarios.view';
+import { RegistrarComunidadView } from './view/registrar-comunidad.view';
+import { MisComunidadesView } from './view/mis-comunidades.view';
 
 export const routes: Routes = [
-    {path: '', component: LoginView, canActivate: [NotLoggedGuard]},
-    {path: 'start', component: StartView, canActivate: [AuthGuard]},
-    {path: 'gestionar-usuarios', component: GestionarUsuariosView, canActivate: [AuthGuard]},
-    // Este redirect siempre debe quedar al ultimo
-    {path: '**', redirectTo: ''}
+    { path: '', component: LoginView, canActivate: [NotLoggedGuard] },
+    { path: 'start', component: StartView, canActivate: [AuthGuard] },
+    { path: 'gestionar-usuarios', component: GestionarUsuariosView, canActivate: [AuthGuard] },
+    { path: '**', redirectTo: '' }
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

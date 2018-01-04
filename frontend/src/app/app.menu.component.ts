@@ -9,7 +9,7 @@ import {LoginService} from './service/login.service';
 @Component({
     selector: 'app-menu',
     template: `
-        <ul *ngIf="isLogged()" app-submenu [item]="model" root="true" class="ultima-menu ultima-main-menu clearfix"
+        <ul *ngIf="loginService.isLogged()" app-submenu [item]="model" root="true" class="ultima-menu ultima-main-menu clearfix"
             [reset]="reset" visible="true"></ul>
     `
 })
@@ -23,10 +23,6 @@ export class AppMenuComponent implements OnInit {
         @Inject(forwardRef(() => AppComponent)) public app: AppComponent,
         private loginService: LoginService
     ) { }
-
-    public isLogged(): boolean {
-        return this.loginService.isLogged();
-    }
 
     ngOnInit() {
         this.model = [
@@ -117,7 +113,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {label: 'Utils', icon: 'build', routerLink: ['/utils']},
-            {label: 'Gestionar Usuarios', icon: 'find_in_page', routerLink: ['gestionar-usuarios']}
+            {label: 'Gestionar Usuarios', icon: 'people', routerLink: ['gestionar-usuarios']}
         ];
     }
 

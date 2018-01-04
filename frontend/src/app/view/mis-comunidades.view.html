@@ -1,0 +1,49 @@
+<h1>Mis Comunidades</h1>
+
+    <div class="ui-g">
+        <div class="ui-g-3">
+            <p-fieldset legend="Filtros">
+                <div>
+                    <label>nombre:</label>
+                </div>
+                <div>
+                    <input type="text" pInputText class="form-control" 
+                        [(ngModel)]="filtro.nombreComunidad" (keyup)="buscar()" />
+                </div>
+            </p-fieldset>
+        </div>
+        <div class="ui-g-9">
+            <p-fieldset legend="Comunidades">
+                <div *ngIf="comunidadesList.length === 0">
+                    <span>No se ha encontrado ninguna comunidad</span>
+                </div>
+
+                <div *ngFor="let comunidad of comunidadesList" >
+                    <div>
+                        <span>Nombre: </span> <span>{{comunidad.nombre}}</span>
+                    </div>
+
+                    <div>
+                        <span>Dirección: </span> <span>{{comunidad.direccion}}</span>
+                    </div>
+
+                    <div>
+                        <span>Administración: </span> 
+                        <ul>
+                            <li *ngFor="let administracion of comunidad.administracionList" >
+                                <span>{{ administracion.cargoAdministracion }}:</span>
+                                <span>{{ administracion.nombreEncargado }}</span>
+                            </li>
+                        </ul>
+                        <div>
+                            <button pButton type="button" label="Entrar"></button>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </p-fieldset>
+        </div>
+    </div>
+
+<p-growl [(value)]="msgs"></p-growl>

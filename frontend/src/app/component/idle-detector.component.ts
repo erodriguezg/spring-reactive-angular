@@ -20,9 +20,9 @@ import {LoginService} from '../service/login.service';
     `
 })
 export class IdleDetectorComponent {
-    public display: boolean;
-    public countdown: number;
-    public timeout: boolean;
+    private display: boolean;
+    private countdown: number;
+    private timeout: boolean;
 
     constructor(private idle: Idle, private loginService: LoginService) {
         this.display = false;
