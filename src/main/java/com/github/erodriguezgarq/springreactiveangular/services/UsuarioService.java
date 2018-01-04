@@ -3,24 +3,23 @@ package com.github.erodriguezgarq.springreactiveangular.services;
 
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioDto;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioFiltroDto;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface UsuarioService {
 
-    List<UsuarioDto> traerTodos();
+    Mono<UsuarioDto> traerPorUsernameConPerfilYPersona(String username);
 
-    UsuarioDto guardarUsuario(UsuarioDto usuario);
+    Mono<UsuarioDto> traerPorRun(Integer run);
 
-    UsuarioDto traerPorUsername(String username);
+    Flux<UsuarioDto> buscar(UsuarioFiltroDto filterDto);
 
-    List<UsuarioDto> buscar(UsuarioFiltroDto filterDto);
+    Mono<UsuarioDto> guardar(UsuarioDto usuario);
 
-    void eliminar(UsuarioDto usuario, Long idPersonaIdentidad);
+    Mono<Void> eliminar(UsuarioDto usuario, Long idUsuarioIdentidad);
 
-    void habilitar(UsuarioDto usuario);
+    Mono<Void> habilitar(UsuarioDto usuario);
 
-    void deshabilitar(UsuarioDto usuario, Long idUsuarioActual);
+    Mono<Void> deshabilitar(UsuarioDto usuario, Long idUsuarioIdentidad);
 
-    UsuarioDto traerPorRun(Integer run);
 }

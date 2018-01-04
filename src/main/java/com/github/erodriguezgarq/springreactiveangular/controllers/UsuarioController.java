@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,15 +28,22 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("/username/{username}")
+    public Mono<ResponseEntity<UsuarioDto>> traerPorId(@PathVariable("username") String username) {
+        return usuarioService.traerPorUsernameConPerfilYPersona(username)
+                .map(usuarioDto -> new ResponseEntity<>(usuarioDto, HttpStatus.OK))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     @RequestMapping(value = "/buscar", method = RequestMethod.POST)
     public List<UsuarioDto> buscar(@RequestBody UsuarioFiltroDto filtros) {
         log.debug("-> buscar");
-        return this.usuarioService.buscar(filtros);
+        return null;
     }
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     public void guardar(@RequestBody @Valid UsuarioDto usuario) {
-        this.usuarioService.guardarUsuario(usuario);
+        log.debug("vacio");
     }
 
 }

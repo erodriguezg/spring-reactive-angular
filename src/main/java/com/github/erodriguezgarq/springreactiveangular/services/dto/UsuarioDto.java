@@ -9,92 +9,36 @@ import java.util.Objects;
  */
 public class UsuarioDto implements Serializable {
 
-    private static final long serialVersionUID = -1118062591140816905L;
-
-    private Long idPersona;
+    private static final long serialVersionUID = -7269724950105299998L;
 
     private String username;
 
-    private Integer rut;
-
-    private String nombres;
-
-    private String apPaterno;
-
-    private String apMaterno;
+    private Boolean habilitado;
 
     private String password;
 
-    private String email;
-
-    private Date fechaNacimiento;
-
-    private Boolean habilitado;
-
     private PerfilDto perfil;
+
+    private PersonaDto persona;
 
     public UsuarioDto() {
         //vacio
     }
 
-    public UsuarioDto(Long idPersona) {
-        this.idPersona = idPersona;
+    public String getUsername() {
+        return username;
     }
 
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Long getIdPersona() {
-        return this.idPersona;
-    }
-
-    public void setRut(Integer rut) {
-        this.rut = rut;
-    }
-
-    public Integer getRut() {
-        return this.rut;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getNombres() {
-        return this.nombres;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Date getFechaNacimiento() {
-        return this.fechaNacimiento;
+    public Boolean getHabilitado() {
+        return habilitado;
     }
 
     public void setHabilitado(Boolean habilitado) {
         this.habilitado = habilitado;
-    }
-
-    public Boolean getHabilitado() {
-        return this.habilitado;
     }
 
     public PerfilDto getPerfil() {
@@ -105,28 +49,20 @@ public class UsuarioDto implements Serializable {
         this.perfil = perfil;
     }
 
-    public String getApPaterno() {
-        return apPaterno;
+    public PersonaDto getPersona() {
+        return persona;
     }
 
-    public void setApPaterno(String apPaterno) {
-        this.apPaterno = apPaterno;
+    public void setPersona(PersonaDto persona) {
+        this.persona = persona;
     }
 
-    public String getApMaterno() {
-        return apMaterno;
+    public String getPassword() {
+        return password;
     }
 
-    public void setApMaterno(String apMaterno) {
-        this.apMaterno = apMaterno;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

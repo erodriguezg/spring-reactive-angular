@@ -43,18 +43,19 @@ public class SecurityController {
     @GetMapping("/login")
     public Mono<RespuestaLoginDto> login(@RequestBody CredencialesDto credenciales) {
         RespuestaLoginDto respuestaLoginDto = new RespuestaLoginDto();
-        Integer rutEntero = Integer.valueOf(credenciales.getRut().trim().split("-")[0].replaceAll("\\.", ""));
-        UsuarioDto usuarioDto = this.usuarioService.traerPorRun(rutEntero);
-        Optional<String> errorOption = validarCredenciales(credenciales, usuarioDto);
-        if (errorOption.isPresent()) {
-            respuestaLoginDto.setExitoLogin(false);
-            respuestaLoginDto.setErrores(Arrays.asList(new String[]{errorOption.get()}));
-        } else {
-            respuestaLoginDto.setToken(tokenService.create(securityMappings.userToTokenSubjectMap(usuarioDto)));
-            respuestaLoginDto.setExitoLogin(true);
-            respuestaLoginDto.setErrores(null);
-        }
-        return Mono.just(respuestaLoginDto);
+        return this.usuarioService.traerPorUsernameConPerfilYPersona(credenciales.getUsername())
+                .flatMap(usuarioDto -> {
+                    Optional<String> errorOption = validarCredenciales(credenciales, usuarioDto);
+                    if (errorOption.isPresent()) {
+                        respuestaLoginDto.setExitoLogin(false);
+                        respuestaLoginDto.setErrores(Arrays.asList(new String[]{errorOption.get()}));
+                    } else {
+                        respuestaLoginDto.setToken(tokenService.create(securityMappings.userToTokenSubjectMap(usuarioDto)));
+                        respuestaLoginDto.setExitoLogin(true);
+                        respuestaLoginDto.setErrores(null);
+                    }
+                    return Mono.just(respuestaLoginDto);
+                });
     }
 
     @GetMapping("/refreshToken")

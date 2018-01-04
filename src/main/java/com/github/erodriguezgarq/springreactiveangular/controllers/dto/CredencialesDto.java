@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class CredencialesDto implements Serializable {
     
-    private String rut;
+    private String username;
     
     private String password;
 
-    public String getRut() {
-        return rut;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -23,5 +23,4 @@ public class CredencialesDto implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 }
