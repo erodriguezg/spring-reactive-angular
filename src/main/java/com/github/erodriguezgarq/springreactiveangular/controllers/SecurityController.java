@@ -8,9 +8,10 @@ import com.github.erodriguezgarq.springreactiveangular.security.SecurityMappings
 import com.github.erodriguezgarq.springreactiveangular.services.UsuarioService;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,11 +41,11 @@ public class SecurityController {
     @Autowired
     private SecurityMappings securityMappings;
 
-    @GetMapping("/login")
-    public Mono<RespuestaLoginDto> login(@RequestBody CredencialesDto credenciales) {
-        RespuestaLoginDto respuestaLoginDto = new RespuestaLoginDto();
+    @PostMapping("/login")
+    public Mono<ResponseEntity<RespuestaLoginDto>> login(@RequestBody CredencialesDto credenciales) {
         return this.usuarioService.traerPorUsernameConPerfilYPersona(credenciales.getUsername())
                 .flatMap(usuarioDto -> {
+                    RespuestaLoginDto respuestaLoginDto = new RespuestaLoginDto();
                     Optional<String> errorOption = validarCredenciales(credenciales, usuarioDto);
                     if (errorOption.isPresent()) {
                         respuestaLoginDto.setExitoLogin(false);
@@ -54,15 +55,21 @@ public class SecurityController {
                         respuestaLoginDto.setExitoLogin(true);
                         respuestaLoginDto.setErrores(null);
                     }
-                    return Mono.just(respuestaLoginDto);
-                });
+                    return Mono.just(new ResponseEntity<>(respuestaLoginDto, HttpStatus.OK));
+                })
+                .defaultIfEmpty(ResponseEntity.notFound().build())
+                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
-    @GetMapping("/refreshToken")
-    public Mono<String> refreshToken() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String token = tokenService.create(securityMappings.authToTokenSubjectMap(auth));
-        return Mono.just(token);
+    @PostMapping("/refreshToken")
+    public Mono<ResponseEntity<String>> refreshToken() {
+        return Mono.just(SecurityContextHolder.getContext().getAuthentication())
+                .flatMap(auth -> {
+                    String token = tokenService.create(securityMappings.authToTokenSubjectMap(auth));
+                    return Mono.just(new ResponseEntity<>(token, HttpStatus.OK));
+                })
+                .defaultIfEmpty(ResponseEntity.notFound().build())
+                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
     private Optional<String> validarCredenciales(CredencialesDto credenciales, UsuarioDto usuarioDto) {

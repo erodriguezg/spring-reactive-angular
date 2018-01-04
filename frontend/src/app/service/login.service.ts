@@ -26,7 +26,7 @@ export class LoginService {
 
     public login(username: string, password: string): Observable<RespuestaLoginDto> {
         const credenciales: CredencialesDto = {
-            rut: username,
+            username: username,
             password: password
         };
         return this.http.post('security/login', JSON.stringify(credenciales))

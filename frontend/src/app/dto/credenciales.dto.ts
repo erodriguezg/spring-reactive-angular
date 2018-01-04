@@ -1,4 +1,4 @@
 export interface CredencialesDto {
-    rut: string;
+    username: string;
     password: string;
 }
