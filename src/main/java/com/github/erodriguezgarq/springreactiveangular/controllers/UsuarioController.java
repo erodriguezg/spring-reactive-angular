@@ -52,6 +52,16 @@ public class UsuarioController {
                 .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
+    @GetMapping("/buscar-test")
+    public Flux<ResponseEntity<UsuarioDto>> buscar() {
+        UsuarioFiltroDto filtros = new UsuarioFiltroDto();
+        log.debug("-> buscando usuarios por filtros: {}", filtros);
+        return usuarioService.buscar(filtros)
+                .map(usuarioDto -> new ResponseEntity<>(usuarioDto, HttpStatus.OK))
+                .defaultIfEmpty(ResponseEntity.notFound().build())
+                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     public Mono<ResponseEntity<Void>> guardar(@RequestBody @Valid UsuarioDto usuario) {
         log.debug("vacio");

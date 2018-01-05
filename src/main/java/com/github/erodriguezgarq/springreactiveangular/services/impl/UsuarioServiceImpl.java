@@ -4,6 +4,7 @@ import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezgarq.springreactiveangular.repository.PerfilRepository;
 import com.github.erodriguezgarq.springreactiveangular.repository.PersonaRepository;
 import com.github.erodriguezgarq.springreactiveangular.repository.UsuarioRepository;
+import com.github.erodriguezgarq.springreactiveangular.repository.template.UsuarioTemplate;
 import com.github.erodriguezgarq.springreactiveangular.services.UsuarioService;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioDto;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioFiltroDto;
@@ -30,6 +31,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private UsuarioTemplate usuarioTemplate;
 
     @Autowired
     private PerfilRepository perfilRepository;
@@ -70,7 +74,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Flux<UsuarioDto> buscar(UsuarioFiltroDto usuarioFiltroDto) {
-        return null;
+        return this.usuarioTemplate.buscar(usuarioFiltroDto);
     }
 
     @Override
