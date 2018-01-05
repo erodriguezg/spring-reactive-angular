@@ -1,13 +1,9 @@
 package com.github.erodriguezgarq.springreactiveangular.repository.template;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
-
-import com.github.erodriguezgarq.springreactiveangular.documents.Usuario;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.PerfilDto;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.PersonaDto;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioDto;
 import com.github.erodriguezgarq.springreactiveangular.services.dto.UsuarioFiltroDto;
-import com.mongodb.BasicDBObject;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -17,7 +13,11 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Date;
+import java.util.List;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.lookup;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 
 @Repository
 public class UsuarioTemplate {
@@ -27,44 +27,43 @@ public class UsuarioTemplate {
     private ReactiveMongoTemplate template;
 
 
-    //https://stackoverflow.com/questions/44949720/spring-mongotemplate-mapping-aggregation-result-to-collections-e-g-list-and
+    @SuppressWarnings({"unchecked", "squid:S1192"})
     public Flux<UsuarioDto> buscar(UsuarioFiltroDto filtros) {
 
         Aggregation agg = newAggregation(
-                lookup("personas", " runPersona", " run", "persona"),
-                lookup("perfiles", " idPerfil", "idPerfil", "perfil"),
+                lookup("personas", "runPersona", "run", "persona"),
+                lookup("perfiles", "idPerfil", "idPerfil", "perfil"),
                 match(Criteria.where("idPerfil").is(2))
         );
 
         return template.aggregate(agg, "usuarios", Document.class)
-                .flatMap(result -> {
-                    return Mono.just(new UsuarioDto());
-                });
-    }
-
-
-
-    /*
-    .flatMap(usuarioQuery -> {
+                .flatMap(document -> {
                     UsuarioDto usuarioDto = new UsuarioDto();
-                    usuarioDto.setUsername(usuarioQuery.getUsername());
-                    usuarioDto.setHabilitado(usuarioQuery.isHabilitado());
-                    if(usuarioQuery.getPersona() != null && usuarioQuery.getPersona().length > 0) {
-                        PersonaQuery personaQuery = usuarioQuery.getPersona()[0];
-                        usuarioDto.setPersona(new PersonaDto());
-                        usuarioDto.getPersona().setRun(personaQuery.getRun());
-                        usuarioDto.getPersona().setEmail(personaQuery.getEmail());
-                        usuarioDto.getPersona().setNombres(personaQuery.getNombres());
-                        usuarioDto.getPersona().setApPaterno(personaQuery.getApellidoPaterno());
-                        usuarioDto.getPersona().setApMaterno(personaQuery.getApellidoMaterno());
-                        usuarioDto.getPersona().setFechaNacimiento(personaQuery.getFechaNacimiento());
+                    usuarioDto.setUsername(document.getString("username"));
+                    usuarioDto.setPassword(document.getString("password"));
+                    usuarioDto.setHabilitado(document.getBoolean("habilitado"));
+                    List<Document> personas = document.get("persona", List.class);
+                    if (personas != null && !personas.isEmpty()) {
+                        Document docPersona = personas.get(0);
+                        PersonaDto personaDto = new PersonaDto();
+                        personaDto.setRun(docPersona.getInteger("run"));
+                        personaDto.setEmail(docPersona.getString("email"));
+                        personaDto.setNombres(docPersona.getString("nombres"));
+                        personaDto.setApPaterno(docPersona.getString("apellidoPaterno"));
+                        personaDto.setApMaterno(docPersona.getString("apellidoMaterno"));
+                        personaDto.setFechaNacimiento(docPersona.getDate("fechaNacimiento"));
+                        usuarioDto.setPersona(personaDto);
                     }
-                    if(usuarioQuery.getPerfil() != null && usuarioQuery.getPerfil().length > 0 ) {
-                        usuarioDto.setPerfil(new PerfilDto());
-                        usuarioDto.getPerfil().setId(usuarioQuery.getPerfil()[0].getIdPerfil());
-                        usuarioDto.getPerfil().setNombre(usuarioQuery.getPerfil()[0].getNombre());
+                    List<Document> perfiles = document.get("perfil", List.class);
+                    if (perfiles != null && !perfiles.isEmpty()) {
+                        Document docPerfil = perfiles.get(0);
+                        PerfilDto perfilDto = new PerfilDto();
+                        perfilDto.setId(docPerfil.getInteger("idPerfil"));
+                        perfilDto.setNombre(docPerfil.getString("nombre"));
+                        usuarioDto.setPerfil(perfilDto);
                     }
                     return Mono.just(usuarioDto);
                 });
-     */
+    }
+
 }
