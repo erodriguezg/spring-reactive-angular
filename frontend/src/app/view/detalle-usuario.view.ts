@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Usuario} from '../domain/usuario';
 import {UsuariosService} from '../service/usuarios.service';
+import {UsuarioDto} from "../dto/usuario.dto";
 
 const PARAM_MODO = 'modo';
 const PARAM_ID_USUARIO = 'id_usuario';
@@ -13,17 +13,15 @@ const MODO_VER = 'ver';
 // tslint:disable-next-line:component-class-suffix
 export class DetalleUsuarioView implements OnInit {
 
-    private usuario: Usuario;
+    private usuario: UsuarioDto;
     private editable: boolean;
     private nuevo: boolean;
 
-    constructor(
-        private usuarioService: UsuariosService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        ) {
+    constructor(private usuarioService: UsuariosService,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,) {
 
-        }
+    }
 
     public ngOnInit() {
         let modo: string;
@@ -34,18 +32,17 @@ export class DetalleUsuarioView implements OnInit {
         });
 
         this.editable = modo === MODO_VER;
-        this.nuevo = idUsuario !== undefined  && idUsuario !== null;
+        this.nuevo = idUsuario !== undefined && idUsuario !== null;
 
         if (!idUsuario) {
-            this.usuario = new Usuario();
+            this.usuario = new UsuarioDto();
         }
-
 
 
     }
 
     public guardar(): void {
-       // metodo guardar
+        // metodo guardar
     }
 
     public volver(): void {

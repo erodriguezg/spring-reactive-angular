@@ -1,12 +1,13 @@
-import {Perfil} from '../domain/perfil';
+import {PerfilDto} from './perfil.dto';
 
 export class UsuarioFiltroDto {
+    run: number;
     nombres: string;
-    apellidos: string;
-    rut: number;
-    perfil: Perfil;
+    apPaterno: string;
+    apMaterno: string;
     email: string;
     fechaNacimientoInferior: Date;
     fechaNacimientoSuperior: Date;
     habilitado: boolean;
+    perfil: PerfilDto;
 }

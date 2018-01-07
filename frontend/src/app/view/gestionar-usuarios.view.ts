@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
-import {Usuario} from '../domain/usuario';
+import {UsuarioDto} from '../dto/usuario.dto';
 import {UsuarioFiltroDto} from '../dto/usuario-filtro.dto';
 import {UsuariosService} from '../service/usuarios.service';
 
@@ -10,7 +10,7 @@ import {UsuariosService} from '../service/usuarios.service';
 // tslint:disable-next-line:component-class-suffix
 export class GestionarUsuariosView implements OnInit {
 
-    private usuarios: Usuario[];
+    private usuarios: UsuarioDto[];
     private filtros: UsuarioFiltroDto;
 
     constructor(private usuarioService: UsuariosService) { }
@@ -18,6 +18,9 @@ export class GestionarUsuariosView implements OnInit {
     ngOnInit() {
         this.filtros = new UsuarioFiltroDto();
         this.usuarioService.buscar(this.filtros)
-            .subscribe( data => this.usuarios = data);
+            .subscribe( data => {
+                console.log("data: " + data);
+                this.usuarios = data;
+            });
     }
 }

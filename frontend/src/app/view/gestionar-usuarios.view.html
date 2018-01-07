@@ -3,14 +3,18 @@
     <header>Usuarios</header>
     <p-column header="RUN" [style]="{'width':'120px'}">
 		<ng-template let-col let-user="rowData" pTemplate type="body">
-            <span>{{user['rut']}}</span>
+            <span>{{user.persona.run}}</span>
 		</ng-template>
 	</p-column>
-    <p-column field="nombres" header="Nombres"></p-column>
-    <p-column field="apellidos" header="Apellidos"></p-column>
+    <p-column field="persona.nombres" header="Nombres"></p-column>
+    <p-column header="Apellidos">
+        <ng-template let-col let-user="rowData" pTemplate type="body">
+            <span>{{user.persona.apPaterno + ' '+ user.persona.apMaterno}}</span>
+        </ng-template>
+    </p-column>
     <p-column field="perfil" header="Perfil">
         <ng-template let-col let-user="rowData" pTemplate type="body">
-            <span>{{user[col.field].nombre}}</span>
+            <span>{{user.perfil.nombre}}</span>
 		</ng-template>
     </p-column>
     <p-column  [style]="{'width':'116px'}">
