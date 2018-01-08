@@ -85,4 +85,16 @@ public class PersonaDto implements Serializable {
     public int hashCode() {
         return Objects.hash(run);
     }
+
+    @Override
+    public String toString() {
+        return "PersonaDto{" +
+                "run=" + run +
+                ", nombres='" + nombres + '\'' +
+                ", apPaterno='" + apPaterno + '\'' +
+                ", apMaterno='" + apMaterno + '\'' +
+                ", email='" + email + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                '}';
+    }
 }

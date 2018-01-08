@@ -55,4 +55,11 @@ public class PerfilDto implements Serializable {
         return Objects.hash(this.id);
     }
 
+    @Override
+    public String toString() {
+        return "PerfilDto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

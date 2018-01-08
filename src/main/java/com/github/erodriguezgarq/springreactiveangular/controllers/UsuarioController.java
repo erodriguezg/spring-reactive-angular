@@ -7,16 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -36,37 +29,30 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/username/{username}")
-    public Mono<ResponseEntity<UsuarioDto>> traerPorId(@PathVariable("username") String username) {
-        return usuarioService.traerPorUsernameConPerfilYPersona(username)
-                .map(usuarioDto -> new ResponseEntity<>(usuarioDto, HttpStatus.OK))
-                .defaultIfEmpty(ResponseEntity.notFound().build())
-                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    public Mono<UsuarioDto> traerPorId(@PathVariable("username") String username) {
+        return usuarioService.traerPorUsernameConPerfilYPersona(username);
     }
 
     @PostMapping("/buscar")
-    public Flux<ResponseEntity<UsuarioDto>> buscar(@RequestBody UsuarioFiltroDto filtros) {
+    @PreAuthorize("isAuthenticated()")
+    public Flux<UsuarioDto> buscar(@RequestBody UsuarioFiltroDto filtros, @AuthenticationPrincipal UsuarioDto principal) {
         log.debug("-> buscando usuarios por filtros: {}", filtros);
-        return usuarioService.buscar(filtros)
-                .map(usuarioDto -> new ResponseEntity<>(usuarioDto, HttpStatus.OK))
-                .defaultIfEmpty(ResponseEntity.notFound().build())
-                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+        log.debug("-> principal: {}", principal);
+        return usuarioService.buscar(filtros);
     }
 
     @GetMapping("/buscar-test")
-    public Flux<ResponseEntity<UsuarioDto>> buscar() {
+    @PreAuthorize("permitAll()")
+    public Flux<UsuarioDto> buscar() {
         UsuarioFiltroDto filtros = new UsuarioFiltroDto();
         log.debug("-> buscando usuarios por filtros: {}", filtros);
-        return usuarioService.buscar(filtros)
-                .map(usuarioDto -> new ResponseEntity<>(usuarioDto, HttpStatus.OK))
-                .defaultIfEmpty(ResponseEntity.notFound().build())
-                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+        return usuarioService.buscar(filtros);
     }
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
-    public Mono<ResponseEntity<Void>> guardar(@RequestBody @Valid UsuarioDto usuario) {
+    public Mono<Void> guardar(@RequestBody @Valid UsuarioDto usuario) {
         log.debug("vacio");
-        return Mono.just(ResponseEntity.ok().<Void>build())
-                .onErrorReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<Void>build());
+        return Mono.empty();
     }
 
 }

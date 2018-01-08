@@ -78,4 +78,14 @@ public class UsuarioDto implements Serializable {
         return Objects.hash(username);
     }
 
+    @Override
+    public String toString() {
+        return "UsuarioDto{" +
+                "username='" + username + '\'' +
+                ", habilitado=" + habilitado +
+                ", password='" + password + '\'' +
+                ", perfil=" + perfil +
+                ", persona=" + persona +
+                '}';
+    }
 }

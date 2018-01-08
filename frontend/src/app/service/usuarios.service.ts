@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiHttp} from '../http/api-http';
 import {UsuarioFiltroDto} from '../dto/usuario-filtro.dto';
 
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import {UsuarioDto} from "../dto/usuario.dto";
 
 @Injectable()

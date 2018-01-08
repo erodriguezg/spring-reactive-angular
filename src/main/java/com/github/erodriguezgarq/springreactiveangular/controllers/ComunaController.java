@@ -27,18 +27,14 @@ public class ComunaController {
 
     @GetMapping("/por-id")
     @PreAuthorize("permitAll()")
-    public Mono<ResponseEntity<ComunaDto>> traerComunaPorIdComuna(@RequestParam("idComuna") Integer idComuna) {
-        return regionProvinciaComunaService.traerComunaPorIdComuna(idComuna)
-                .map(comunaDto -> new ResponseEntity<>(comunaDto, HttpStatus.OK))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    public Mono<ComunaDto> traerComunaPorIdComuna(@RequestParam("idComuna") Integer idComuna) {
+        return regionProvinciaComunaService.traerComunaPorIdComuna(idComuna);
     }
 
     @GetMapping("/por-idprovincia")
     @PreAuthorize("permitAll()")
-    public Flux<ResponseEntity<ComunaDto>> traerComunasPorProvincia(@RequestParam("idprovincia") int idProvincia) {
-        return regionProvinciaComunaService.traerComunasPorProvincia(new ProvinciaDto(idProvincia))
-                .map(comunaDto -> new ResponseEntity<>(comunaDto, HttpStatus.OK))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    public Flux<ComunaDto> traerComunasPorProvincia(@RequestParam("idprovincia") int idProvincia) {
+        return regionProvinciaComunaService.traerComunasPorProvincia(new ProvinciaDto(idProvincia));
     }
 
 }
