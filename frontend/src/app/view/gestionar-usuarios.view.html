@@ -1,5 +1,5 @@
 <h1> Gestionar Usuarios</h1>
-<p-dataTable [value]="usuarios"  rows="15" [paginator]="true" emptyMessage="No se encontraron usuarios">
+<p-dataTable [value]="usuarios"  rows="15" [paginator]="true" [responsive]="true" emptyMessage="No se encontraron usuarios">
     <header>Usuarios</header>
     <p-column header="RUN" [style]="{'width':'120px'}">
 		<ng-template let-col let-user="rowData" pTemplate type="body">

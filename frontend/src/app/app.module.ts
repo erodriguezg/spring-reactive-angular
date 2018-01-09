@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, RequestOptions, ConnectionBackend, XHRBackend } from '@angular/http';
-import { Router } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routes';
 import 'rxjs/add/operator/toPromise';
-
-import { ApiHttp } from './http/api-http';
 
 import { AccordionModule } from 'primeng/primeng';
 import { AutoCompleteModule } from 'primeng/primeng';
@@ -16,6 +13,7 @@ import { BreadcrumbModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { CarouselModule } from 'primeng/primeng';
+import {ColorPickerModule} from 'primeng/primeng';
 import { ChartModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { ChipsModule } from 'primeng/primeng';
@@ -48,6 +46,7 @@ import { MenubarModule } from 'primeng/primeng';
 import { MessagesModule } from 'primeng/primeng';
 import { MultiSelectModule } from 'primeng/primeng';
 import { OrderListModule } from 'primeng/primeng';
+import {OrganizationChartModule} from 'primeng/primeng';
 import { OverlayPanelModule } from 'primeng/primeng';
 import { PaginatorModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
@@ -75,12 +74,16 @@ import { TreeModule } from 'primeng/primeng';
 import { TreeTableModule } from 'primeng/primeng';
 import { NgIdleModule } from '@ng-idle/core';
 
-import { AppComponent } from './app.component';
-import { AppMenuComponent, AppSubMenu } from './app.menu.component';
-import { AppTopBar } from './app.topbar.component';
-import { AppFooterComponent } from './app.footer.component';
-import { InlineProfileComponent } from './app.profile.component';
+import { Router } from '@angular/router';
+import { ApiHttp } from './http/api-http';
 
+import { AppComponent } from './app.component';
+import {AppMenuComponent, AppSubMenuComponent} from './app.menu.component';
+import { AppTopbarComponent } from './app.topbar.component';
+import { AppFooterComponent } from './app.footer.component';
+import { AppInlineProfileComponent } from './app.profile.component';
+import { AppBreadcrumbComponent} from "./app.breadcrumb.component";
+import { AppRightpanelComponent} from "./app.rightpanel.component";
 // Componentes
 import { IdleDetectorComponent } from './component/idle-detector.component';
 import { LoadingUIComponent } from './component/loading-ui.component';
@@ -92,6 +95,7 @@ import { StartView } from './view/start.view';
 import { GestionarUsuariosView } from './view/gestionar-usuarios.view';
 
 // Servicios
+import  { BreadcrumbService } from './breadcrumb.service';
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { LoadingService } from './service/loading.service';
 import { LoginService } from './service/login.service';
@@ -120,6 +124,7 @@ export function apiHttpServiceFactory(backend: XHRBackend, defaultOptions: Reque
         ButtonModule,
         CalendarModule,
         CarouselModule,
+        ColorPickerModule,
         ChartModule,
         CheckboxModule,
         ChipsModule,
@@ -153,6 +158,7 @@ export function apiHttpServiceFactory(backend: XHRBackend, defaultOptions: Reque
         MultiSelectModule,
         OrderListModule,
         OverlayPanelModule,
+        OrganizationChartModule,
         PaginatorModule,
         PanelModule,
         PanelMenuModule,
@@ -182,10 +188,12 @@ export function apiHttpServiceFactory(backend: XHRBackend, defaultOptions: Reque
     declarations: [
         AppComponent,
         AppMenuComponent,
-        AppSubMenu,
-        AppTopBar,
+        AppSubMenuComponent,
+        AppTopbarComponent,
         AppFooterComponent,
-        InlineProfileComponent,
+        AppInlineProfileComponent,
+        AppBreadcrumbComponent,
+        AppRightpanelComponent,
         // Componentes
         IdleDetectorComponent,
         LoadingUIComponent,
@@ -214,7 +222,8 @@ export function apiHttpServiceFactory(backend: XHRBackend, defaultOptions: Reque
         LoadingService,
         LoginService,
         UsuariosService,
-        TerritorioService
+        TerritorioService,
+        BreadcrumbService
     ],
     bootstrap: [AppComponent]
 })

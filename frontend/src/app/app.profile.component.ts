@@ -1,19 +1,12 @@
-import {Component, Input, OnInit, EventEmitter,
-    ViewChild, trigger, state, transition, style,
-    animate, Inject, forwardRef} from '@angular/core';
-import {Location} from '@angular/common';
-import {Router} from '@angular/router';
-import {MenuItem} from 'primeng/primeng';
-import {AppComponent} from './app.component';
+import {Component, trigger, state, transition, style, animate} from '@angular/core';
 import {LoginService} from './service/login.service';
 
 @Component({
-    selector: 'inline-profile',
-    template:
-    `
+    selector: 'app-inline-profile',
+    template: `
         <div class="profile" [ngClass]="{'profile-expanded':active}">
-            <div class="profile-image"></div>
             <a href="#" (click)="onClick($event)">
+                <img class="profile-image" src="assets/layout/images/avatar.png" />
                 <span class="profile-name">Jane Williams</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </a>
@@ -38,7 +31,7 @@ import {LoginService} from './service/login.service';
                     <span>Settings</span>
                 </a>
             </li>
-            <li  *ngIf="loginService.isLogged()" role="menuitem">
+            <li *ngIf="loginService.isLogged()" role="menuitem">
                 <a href="#" (click)="logout()" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
                     <i class="material-icons">power_settings_new</i>
                     <span>Logout</span>
@@ -59,13 +52,13 @@ import {LoginService} from './service/login.service';
         ])
     ]
 })
-export class InlineProfileComponent {
+export class AppInlineProfileComponent {
 
     active: boolean;
 
     constructor(private loginService: LoginService) {}
 
-    public onClick(event) {
+    onClick(event) {
         this.active = !this.active;
         event.preventDefault();
     }

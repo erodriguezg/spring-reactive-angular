@@ -37,6 +37,50 @@
                     <input type="text" pInputText>
                 </div>
             </div>
+            
+            <h1>Filled InputText</h1>
+            <div class="ui-g form-group">
+                <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield md-inputfield-fill">
+                        <input type="text" pInputText>
+                        <label>Name</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield md-inputfield-fill">
+                        <input type="text" pInputText>
+                        <label>Email</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield md-inputfield-fill">
+                        <input type="text" pInputText>
+                        <label>Phone</label>
+                    </span>
+                </div>
+            </div>
+            
+            <h1>TextBox</h1>
+            <div class="ui-g form-group">
+                <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield md-inputfield-box">
+                        <input type="text" pInputText>
+                        <label>Name</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield md-inputfield-box">
+                        <input type="text" pInputText>
+                        <label>Email</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield md-inputfield-box">
+                        <input type="text" pInputText>
+                        <label>Phone</label>
+                    </span>
+                </div>
+            </div>            
         </div>
         
         <div class="card card-w-title">
@@ -99,7 +143,7 @@
         
         <div class="card card-w-title">
             <h1>Chips</h1>
-            <p-chips [max]="3"></p-chips>
+            <p-chips></p-chips>
         </div>
     </div>
     
@@ -157,8 +201,64 @@
             <h1>Rating</h1>
             <p-rating [(ngModel)]="ratingValue"></p-rating>
         </div>
+        
+        <div class="card card-w-title">
+            <h1>ColorPicker</h1>
+            <p-colorPicker [(ngModel)]="color" inline="true"></p-colorPicker>
+        </div>
     </div>
     
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>Input Groups</h1>
+            
+            <div class="ui-g form-group">
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="material-icons">account_circle</i></span>
+                        <span class="md-inputfield">
+                            <input type="text" pInputText> 
+                            <label>Username</label>        
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="material-icons">credit_card</i></span>  
+                        <span class="ui-inputgroup-addon"><i class="material-icons">card_travel</i></span>   
+                        <span class="md-inputfield">
+                            <input type="text" pInputText> 
+                            <label>Price</label>        
+                        </span>
+                        <span class="ui-inputgroup-addon">$</span>  
+                        <span class="ui-inputgroup-addon">.00</span>      
+                    </div>
+                </div>
+                            
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="md-inputfield">
+                            <input type="text" pInputText> 
+                            <label>Keyword</label>        
+                        </span>
+                        <button pButton type="button" icon="ui-icon-search"></button>      
+                    </div>
+                </div>
+                
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><p-checkbox></p-checkbox></span>
+                        <span class="md-inputfield">
+                            <input type="text" pInputText> 
+                            <label>Confirm</label>        
+                        </span>         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
     <div class="ui-g-12">
         <div class="card card-w-title">
             <h1>Editor</h1>
@@ -234,6 +334,8 @@
                         
                         <button pButton type="button" label="Orange Button" style="margin-bottom:10px" class="orange-btn"></button>
                         
+                        <button pButton type="button" label="Blue Button" style="margin-bottom:10px" class="blue-btn"></button>
+                        
                         <button pButton type="button" label="Green Button" style="margin-bottom:10px" class="green-btn"></button>
                         
                         <button pButton type="button" label="Deep-Orange Button" style="margin-bottom:10px" class="deep-orange-btn"></button>
@@ -261,6 +363,8 @@
                         <button pButton type="button" label="Red Button" style="margin-bottom:10px" class="red-btn flat"></button>
                         
                         <button pButton type="button" label="Orange Button" style="margin-bottom:10px" class="orange-btn flat"></button>
+                        
+                        <button pButton type="button" label="Blue Button" style="margin-bottom:10px" class="blue-btn flat"></button>
                         
                         <button pButton type="button" label="Green Button" style="margin-bottom:10px" class="green-btn flat"></button>
                         

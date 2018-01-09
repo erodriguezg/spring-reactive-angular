@@ -1,20 +1,28 @@
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BreadcrumbService} from '../../breadcrumb.service';
 
 @Component({
-    templateUrl: './chartsdemo.html'
+    templateUrl: './chartsdemo.component.html'
 })
-export class ChartsDemo implements OnInit {
-    
+export class ChartsDemoComponent implements OnInit {
+
     lineData: any;
-    
+
     barData: any;
-    
+
     pieData: any;
-    
+
     polarData: any;
-    
+
     radarData: any;
-    
+
+    constructor(private breadcrumbService: BreadcrumbService) {
+        this.breadcrumbService.setItems([
+            { label: 'Components' },
+            { label: 'Charts', routerLink: ['/chart'] }
+        ]);
+    }
+
     ngOnInit() {
         this.lineData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -33,7 +41,7 @@ export class ChartsDemo implements OnInit {
                 }
             ]
         };
-        
+
         this.barData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -50,26 +58,26 @@ export class ChartsDemo implements OnInit {
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
-        }
-        
+        };
+
         this.pieData = {
-            labels: ['A','B','C'],
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
                     backgroundColor: [
-                        "#FFC107",
-                        "#03A9F4",
-                        "#4CAF50"
+                        '#FFC107',
+                        '#03A9F4',
+                        '#4CAF50'
                     ],
                     hoverBackgroundColor: [
-                        "#FFE082",
-                        "#81D4FA",
-                        "#A5D6A7"
+                        '#FFE082',
+                        '#81D4FA',
+                        '#A5D6A7'
                     ]
-                }]    
+                }]
             };
-            
+
         this.polarData = {
             datasets: [{
                 data: [
@@ -80,23 +88,23 @@ export class ChartsDemo implements OnInit {
                     14
                 ],
                 backgroundColor: [
-                    "#FFC107",
-                    "#03A9F4",
-                    "#4CAF50",
-                    "#E91E63",
-                    "#9C27B0"
+                    '#FFC107',
+                    '#03A9F4',
+                    '#4CAF50',
+                    '#E91E63',
+                    '#9C27B0'
                 ],
                 label: 'My dataset'
             }],
             labels: [
-                "Red",
-                "Green",
-                "Yellow",
-                "Grey",
-                "Blue"
+                'Red',
+                'Green',
+                'Yellow',
+                'Grey',
+                'Blue'
             ]
         };
-        
+
         this.radarData = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
