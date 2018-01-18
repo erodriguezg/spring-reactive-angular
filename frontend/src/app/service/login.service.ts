@@ -3,7 +3,7 @@ import { ApiHttp } from '../http/api-http';
 import { Response, URLSearchParams, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import { SessionStorage } from 'ng2-webstorage';
+import { SessionStorage } from 'ngx-webstorage';
 import { Sesion } from '../domain/sesion';
 import { CredencialesDto } from '../dto/credenciales.dto';
 import { RespuestaLoginDto } from '../dto/respuesta-login.dto';

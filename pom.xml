@@ -55,8 +55,8 @@
         <version.assertj>2.2.0</version.assertj>
         <version.mockito>2.8.47</version.mockito>
 
-        <frontend.node.version>v6.9.1</frontend.node.version>
-        <frontend.yarn.version>v0.27.5</frontend.yarn.version>
+        <frontend.node.version>v9.4.0</frontend.node.version>
+        <frontend.yarn.version>v1.3.2</frontend.yarn.version>
         <frontend.environment>prod</frontend.environment>
         <frontend.skipBuild>false</frontend.skipBuild>
 
@@ -352,7 +352,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.4</version>
+                <version>1.6</version>
                 <configuration>
                     <nodeVersion>${frontend.node.version}</nodeVersion>
                     <yarnVersion>${frontend.yarn.version}</yarnVersion>

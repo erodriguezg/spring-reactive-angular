@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, RequestOptionsArgs, Request, Response, ConnectionBackend, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {Router} from '@angular/router';
-import {SessionStorage} from 'ng2-webstorage';
+import {SessionStorage} from 'ngx-webstorage';
 import {ENVIRONMENT} from 'environments/environment';
 import {LoadingService} from '../service/loading.service';
 import {Sesion} from '../domain/sesion';

@@ -96,7 +96,7 @@ import { GestionarUsuariosView } from './view/gestionar-usuarios.view';
 
 // Servicios
 import  { BreadcrumbService } from './breadcrumb.service';
-import { Ng2Webstorage } from 'ng2-webstorage';
+import { Ng2Webstorage } from 'ngx-webstorage';
 import { LoadingService } from './service/loading.service';
 import { LoginService } from './service/login.service';
 import { UsuariosService } from './service/usuarios.service';

@@ -61,6 +61,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     constructor(public renderer: Renderer, private loginService: LoginService) {}
 
     ngAfterViewInit() {
+        if(!this.loginService.isLogged()) {
+            return;
+        }
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;
         this.layoutMenuScroller = <HTMLDivElement> this.layoutMenuScrollerViewChild.nativeElement;
 
